@@ -1,0 +1,150 @@
+{
+  "identity": {
+    "name": "E1",
+    "archetype": "The Anti-AI Designer",
+    "mission": "Create a 'Midnight Fintech' experience that feels like a hedge fund control room, not a generic SaaS dashboard."
+  },
+  "typography": {
+    "headings": {
+      "family": "Manrope, sans-serif",
+      "weights": ["600", "700", "800"],
+      "usage": "Use for all page titles, card headers, and major metric displays. Tracking-tight is mandatory for sizes above 24px."
+    },
+    "body": {
+      "family": "IBM Plex Sans, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Use for all standard text, labels, and descriptions. Excellent legibility at small sizes."
+    },
+    "mono": {
+      "family": "JetBrains Mono, monospace",
+      "weights": ["400", "500"],
+      "usage": "MANDATORY for all financial data, tickers, percentages, and tables. Ensures tabular alignment."
+    }
+  },
+  "colors": {
+    "theme": "Midnight Fintech",
+    "mode": "dark",
+    "palette": {
+      "background": {
+        "default": "#020617",
+        "paper": "#0F172A",
+        "elevated": "#1E293B"
+      },
+      "primary": {
+        "main": "#3B82F6",
+        "hover": "#2563EB",
+        "foreground": "#FFFFFF"
+      },
+      "accent": {
+        "gold": "#F59E0B",
+        "emerald": "#10B981",
+        "rose": "#F43F5E"
+      },
+      "text": {
+        "primary": "#F8FAFC",
+        "secondary": "#94A3B8",
+        "muted": "#64748B"
+      },
+      "border": {
+        "subtle": "rgba(148, 163, 184, 0.1)",
+        "active": "rgba(59, 130, 246, 0.5)"
+      }
+    },
+    "gradients": {
+      "hero": "linear-gradient(to bottom right, #020617, #0F172A)",
+      "glow": "radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%)"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": {
+      "usage": "Sticky headers, floating filters, and modal overlays.",
+      "classes": "bg-slate-950/70 backdrop-blur-xl border-b border-white/10"
+    },
+    "borders": {
+      "usage": "Use 1px borders with low opacity to define structure without clutter.",
+      "classes": "border border-white/5"
+    },
+    "shadows": {
+      "usage": "Soft, diffuse shadows to lift active elements.",
+      "classes": "shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
+    }
+  },
+  "grids": {
+    "dashboard": {
+      "name": "The Control Room",
+      "classes": "grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-6",
+      "logic": "Metrics (col-span-3), Main Chart (col-span-9), List (col-span-12)"
+    },
+    "landing": {
+      "name": "The Tetris",
+      "classes": "grid grid-cols-1 md:grid-cols-12 gap-8 p-8 md:p-12",
+      "logic": "Hero (col-span-full), Features (col-span-4)"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-blue-600 hover:bg-blue-500 text-white rounded-md px-6 py-2.5 font-medium transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)]",
+      "secondary": "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-md px-6 py-2.5 font-medium transition-all"
+    },
+    "cards": {
+      "base": "bg-slate-900/50 border border-white/5 rounded-xl p-6 hover:border-blue-500/30 transition-colors duration-300",
+      "interactive": "group relative overflow-hidden bg-slate-900/50 border border-white/5 rounded-xl p-6 hover:bg-slate-800/50 transition-all cursor-pointer"
+    },
+    "inputs": {
+      "base": "bg-slate-950 border border-slate-800 rounded-md px-4 py-2 text-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-600"
+    },
+    "sliders": {
+      "custom": "Use Shadcn Slider but override the thumb to be a glowing 'orb' (h-4 w-4 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]) and the track to be thin (h-1 bg-slate-800)."
+    }
+  },
+  "motion": {
+    "transitions": "transition-all duration-300 ease-out",
+    "hover": "hover:-translate-y-1 hover:shadow-lg",
+    "entrance": {
+      "initial": { "opacity": 0, "y": 20 },
+      "animate": { "opacity": 1, "y": 0 },
+      "transition": { "duration": 0.4 }
+    }
+  },
+  "media": {
+    "image_urls": {
+      "hero_background": {
+        "url": "https://images.unsplash.com/photo-1763854021223-098e818cd783?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBmaW5hbmNpYWwlMjBkaXN0cmljdCUyMHNreWxpbmUlMjBibHVlJTIwaG91cnxlbnwwfHx8fDE3NjU1MjMzNjB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Modern city skyline at blue hour, conveying stability and scale.",
+        "category": "background"
+      },
+      "abstract_data": {
+        "url": "https://images.unsplash.com/photo-1764265992174-f483492edb77?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRpZ2l0YWwlMjBkYXRhJTIwZmxvdyUyMGJsdWUlMjBtaW5pbWFsaXN0fGVufDB8fHx8MTc2NTUyMzM2MXww&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract blue grid texture, perfect for feature backgrounds or card overlays.",
+        "category": "texture"
+      },
+      "team_meeting": {
+        "url": "https://images.unsplash.com/photo-1758691736975-9f7f643d178e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkaXZlcnNlJTIwYnVzaW5lc3MlMjB0ZWFtJTIwbWVldGluZyUyMG1vZGVybiUyMG9mZmljZXxlbnwwfHx8fDE3NjU1MjMzNjN8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Diverse professional team, use for 'About' or 'Advisors' section.",
+        "category": "content"
+      }
+    },
+    "icons": "Use 'lucide-react' for all UI icons. Use 'recharts' for data visualization."
+  },
+  "accessibility": {
+    "contrast": "Ensure all text meets WCAG AA (4.5:1) against the dark background. Use lighter grays (Slate-300/400) for secondary text, never dark gray.",
+    "focus": "Visible focus rings (ring-2 ring-blue-500) are mandatory for keyboard navigation.",
+    "reduced_motion": "Respect 'prefers-reduced-motion' media query."
+  },
+  "instructions_to_main_agent": [
+    "1. SETUP: Install 'lucide-react', 'recharts', 'framer-motion', 'clsx', 'tailwind-merge' if not present.",
+    "2. THEME: Implement the 'Midnight Fintech' color palette in 'tailwind.config.js' immediately. Do not use default Shadcn colors.",
+    "3. LAYOUT: Build the 'Fund Explorer' using the 'Control Room' grid. It must feel dense but organized.",
+    "4. INTERACTION: The 'Weight Sliders' are the core feature. They must feel instant. Use React state for immediate score updates, debounce the API call if needed.",
+    "5. CHARTS: Style Recharts to match the dark theme. Remove grid lines or make them very subtle (opacity 0.05). Use custom Tooltips.",
+    "6. AUTH: Design the Login page with the 'hero_background' image on one side and a clean, glassmorphism form on the other.",
+    "7. ADMIN: The Admin panel should look distinct - perhaps more 'utilitarian' (less glass, more solid borders) to signify control."
+  ],
+  "universal_guidelines": [
+    "Do not use 'Inter' for headings.",
+    "Do not use gradients for text (it kills readability).",
+    "Always add 'data-testid' to interactive elements.",
+    "Use 'sonner' for toast notifications.",
+    "Avoid 'AI slop' - generic, centered, low-contrast designs."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "summary": "Completed comprehensive testing of authenticated features including preferences page weight sliders and dashboard filters with z-50 fix. All core functionality working correctly.",
+  
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  
+  "passed_tests": [
+    "Authentication using test session token works correctly",
+    "Dashboard loads with proper user greeting ('Welcome back, Test User')",
+    "Preferences page navigation from dashboard works",
+    "All 5 weight sliders present and functional (consistency, volatility, performance, portfolio_quality, valuation)",
+    "Weight slider adjustments work correctly (0-50 range per bucket)",
+    "Total weight calculation updates dynamically and shows correct values",
+    "Save button enables/disables based on total weight = 100 validation",
+    "Reset functionality restores default weights (totaling 100)",
+    "Save preferences functionality works when total = 100",
+    "Category dropdown opens with z-50 fix and shows all options (Flexi, LargeCap, MidCap, MultiCap, SmallCap)",
+    "History dropdown opens with z-50 fix and shows options (3+ Years, 5+ Years)",
+    "Apply filters button works and reloads fund list",
+    "Search functionality filters funds correctly (tested with 'ICICI')",
+    "Navigation between dashboard and preferences works bidirectionally",
+    "Warning message displays when total weight != 100",
+    "Toast notifications work for reset functionality"
+  ],
+  
+  "test_report_links": [],
+  
+  "action_item_for_main_agent": "",
+  
+  "updated_files": [],
+  
+  "success_percentage": {
+    "frontend": "100%",
+    "authentication": "100%",
+    "preferences_functionality": "100%",
+    "dashboard_filters": "100%"
+  },
+  
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true"
+}
