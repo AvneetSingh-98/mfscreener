@@ -1,0 +1,1070 @@
+{
+  "fund_profile": {
+    "aum_month_end_cr": 129782.54,
+    "aum_monthly_avg_cr": 127493.38,
+    "expense_ratio_direct": 0.63,
+    "portfolio_turnover": 12.67,
+    "fund_managers": [
+      {
+        "name": "Rajeev Thakkar\nParag Parikh Flexi Cap Fund",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raunak Onkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raj Mehta",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rukun Tarachandani",
+        "managing_since": "May 16, 2022",
+        "experience_years": 3.6
+      },
+      {
+        "name": "Tejas Soman",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Mansi Kariya",
+        "managing_since": "December 22, 2023",
+        "experience_years": 2.0
+      },
+      {
+        "name": "Aishwarya Dhar",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rajeev Thakkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raunak Onkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raj Mehta",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rukun Tarachandani",
+        "managing_since": "May 16, 2022",
+        "experience_years": 3.6
+      },
+      {
+        "name": "Tejas Soman",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Aishwarya Dhar",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rajeev Thakkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raunak Onkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raj Mehta",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rukun Tarachandani",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Tejas Soman",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Mansi Kariya",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Rajeev Thakkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raunak Onkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raj Mehta",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rukun Tarachandani",
+        "managing_since": "May 16, 2022",
+        "experience_years": 3.6
+      },
+      {
+        "name": "Tejas Soman",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Mansi Kariya",
+        "managing_since": "December 22, 2023",
+        "experience_years": 2.0
+      },
+      {
+        "name": "Rajeev Thakkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raunak Onkar",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Raj Mehta",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Rukun Tarachandani",
+        "managing_since": "Inception",
+        "experience_years": 12.6
+      },
+      {
+        "name": "Tejas Soman",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Aishwarya Dhar",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      },
+      {
+        "name": "Tejas Soman",
+        "managing_since": "December 22, 2023",
+        "experience_years": 2.0
+      },
+      {
+        "name": "Aishwarya Dhar",
+        "managing_since": "September 1, 2025",
+        "experience_years": 0.3
+      }
+    ]
+  },
+  "portfolio": {
+    "equity_india": [
+      {
+        "name": "HDFC Bank Limited",
+        "isin": "INE040A01034",
+        "sector": "Banks",
+        "weight": 8.03
+      },
+      {
+        "name": "Power Grid Corporation of India Limited",
+        "isin": "INE752E01010",
+        "sector": "Power",
+        "weight": 5.91
+      },
+      {
+        "name": "ICICI Bank Limited",
+        "isin": "INE090A01021",
+        "sector": "Banks",
+        "weight": 4.85
+      },
+      {
+        "name": "Bajaj Holdings & Investment Limited",
+        "isin": "INE118A01012",
+        "sector": "Finance",
+        "weight": 4.71
+      },
+      {
+        "name": "Coal India Limited",
+        "isin": "INE522F01014",
+        "sector": "Consumable Fuels",
+        "weight": 4.7
+      },
+      {
+        "name": "ITC Limited",
+        "isin": "INE154A01025",
+        "sector": "Diversified FMCG",
+        "weight": 4.51
+      },
+      {
+        "name": "Kotak Mahindra Bank Limited",
+        "isin": "INE237A01028",
+        "sector": "Banks",
+        "weight": 3.98
+      },
+      {
+        "name": "Mahindra & Mahindra Limited",
+        "isin": "INE101A01026",
+        "sector": "Automobiles",
+        "weight": 3.6
+      },
+      {
+        "name": "Bharti Airtel Limited",
+        "isin": "INE397D01024",
+        "sector": "Telecom - Services",
+        "weight": 3.43
+      },
+      {
+        "name": "Maruti Suzuki India Limited",
+        "isin": "INE585B01010",
+        "sector": "Automobiles",
+        "weight": 3.37
+      },
+      {
+        "name": "Axis Bank Limited",
+        "isin": "INE238A01034",
+        "sector": "Banks",
+        "weight": 3.28
+      },
+      {
+        "name": "HCL Technologies Limited",
+        "isin": "INE860A01027",
+        "sector": "IT - Software",
+        "weight": 2.48
+      },
+      {
+        "name": "Infosys Limited",
+        "isin": "INE009A01021",
+        "sector": "IT - Software",
+        "weight": 2.12
+      },
+      {
+        "name": "Dr. Reddy's Laboratories Limited",
+        "isin": "INE089A01031",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "weight": 1.27
+      },
+      {
+        "name": "Cipla Limited",
+        "isin": "INE059A01026",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "weight": 1.27
+      },
+      {
+        "name": "Zydus Lifesciences Limited",
+        "isin": "INE010B01027",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "weight": 1.26
+      },
+      {
+        "name": "Indian Energy Exchange Limited",
+        "isin": "INE022Q01020",
+        "sector": "Capital Markets",
+        "weight": 0.87
+      },
+      {
+        "name": "Balkrishna Industries Limited",
+        "isin": "INE787D01026",
+        "sector": "Auto Components",
+        "weight": 0.75
+      },
+      {
+        "name": "Zydus Wellness Limited",
+        "isin": "INE768C01028",
+        "sector": "Food Products",
+        "weight": 0.73
+      },
+      {
+        "name": "Tata Consultancy Services Limited",
+        "isin": "INE467B01029",
+        "sector": "IT - Software",
+        "weight": 0.68
+      },
+      {
+        "name": "Multi Commodity Exchange of India Limited",
+        "isin": "INE745G01035",
+        "sector": "Capital Markets",
+        "weight": 0.62
+      },
+      {
+        "name": "EID Parry India Limited",
+        "isin": "INE126A01031",
+        "sector": "Food Products",
+        "weight": 0.46
+      },
+      {
+        "name": "Narayana Hrudayalaya Limited",
+        "isin": "INE410P01011",
+        "sector": "Healthcare Services",
+        "weight": 0.3
+      },
+      {
+        "name": "Central Depository Services (India) Limited",
+        "isin": "INE736A01011",
+        "sector": "Capital Markets",
+        "weight": 0.28
+      },
+      {
+        "name": "ICRA Limited",
+        "isin": "INE725G01011",
+        "sector": "Capital Markets",
+        "weight": 0.14
+      },
+      {
+        "name": "Maharashtra Scooters Limited",
+        "isin": "INE288A01013",
+        "sector": "Finance",
+        "weight": 0.09
+      },
+      {
+        "name": "Indus Towers Limited",
+        "isin": "INE121J01017",
+        "sector": "Telecom - Services",
+        "weight": 0.02
+      },
+      {
+        "name": "Nesco Limited",
+        "isin": "INE317F01035",
+        "sector": "Commercial Services & Supplies",
+        "weight": 0.02
+      },
+      {
+        "name": "Swaraj Engines Limited",
+        "isin": "INE277A01016",
+        "sector": "Industrial Products",
+        "weight": 0.01
+      },
+      {
+        "name": "Reliance Industries Limited",
+        "isin": "INE002A01018",
+        "sector": "Petroleum Products",
+        "weight": 0.8
+      },
+      {
+        "name": "Bajaj Finance Limited",
+        "isin": "INE296A01032",
+        "sector": "Finance",
+        "weight": 0.34
+      },
+      {
+        "name": "Eternal Limited",
+        "isin": "INE758T01015",
+        "sector": "Retailing",
+        "weight": 0.15
+      },
+      {
+        "name": "Jio Financial Services Limited",
+        "isin": "INE758E01017",
+        "sector": "Finance",
+        "weight": 0.14
+      },
+      {
+        "name": "State Bank of India",
+        "isin": "INE062A01020",
+        "sector": "Banks",
+        "weight": 0.14
+      },
+      {
+        "name": "Hindalco Industries Limited",
+        "isin": "INE038A01020",
+        "sector": "Non - Ferrous Metals",
+        "weight": 0.12
+      },
+      {
+        "name": "Sun Pharmaceutical Industries Limited",
+        "isin": "INE044A01036",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "weight": 0.11
+      },
+      {
+        "name": "Titan Company Limited",
+        "isin": "INE280A01028",
+        "sector": "Consumer Durables",
+        "weight": 0.1
+      },
+      {
+        "name": "Bharat Electronics Limited",
+        "isin": "INE263A01024",
+        "sector": "Aerospace & Defense",
+        "weight": 0.1
+      },
+      {
+        "name": "Larsen & Toubro Limited",
+        "isin": "INE018A01030",
+        "sector": "Construction",
+        "weight": 0.09
+      },
+      {
+        "name": "IndusInd Bank Limited",
+        "isin": "INE095A01012",
+        "sector": "Banks",
+        "weight": 0.09
+      },
+      {
+        "name": "Tata Steel Limited",
+        "isin": "INE081A01020",
+        "sector": "Ferrous Metals",
+        "weight": 0.08
+      },
+      {
+        "name": "DLF Limited",
+        "isin": "INE271C01023",
+        "sector": "Realty",
+        "weight": 0.06
+      },
+      {
+        "name": "Punjab National Bank",
+        "isin": "INE160A01022",
+        "sector": "Banks",
+        "weight": 0.06
+      },
+      {
+        "name": "Bajaj Finserv Limited",
+        "isin": "INE918I01026",
+        "sector": "Finance",
+        "weight": 0.05
+      },
+      {
+        "name": "Vedanta Limited",
+        "isin": "INE205A01025",
+        "sector": "Diversified Metals",
+        "weight": 0.05
+      },
+      {
+        "name": "Hindustan Aeronautics Limited",
+        "isin": "INE066F01020",
+        "sector": "Aerospace & Defense",
+        "weight": 0.04
+      },
+      {
+        "name": "NTPC Limited",
+        "isin": "INE733E01010",
+        "sector": "Power",
+        "weight": 0.04
+      },
+      {
+        "name": "Varun Beverages Limited",
+        "isin": "INE200M01039",
+        "sector": "Beverages",
+        "weight": 0.04
+      },
+      {
+        "name": "Trent Limited",
+        "isin": "INE849A01020",
+        "sector": "Retailing",
+        "weight": 0.03
+      },
+      {
+        "name": "Lupin Limited",
+        "isin": "INE326A01037",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "weight": 0.03
+      },
+      {
+        "name": "Tech Mahindra Limited",
+        "isin": "INE669C01036",
+        "sector": "IT - Software",
+        "weight": 0.03
+      },
+      {
+        "name": "Nestle India Limited",
+        "isin": "INE239A01024",
+        "sector": "Food Products",
+        "weight": 0.03
+      },
+      {
+        "name": "LIC Housing Finance Limited",
+        "isin": "INE115A01026",
+        "sector": "Finance",
+        "weight": 0.03
+      },
+      {
+        "name": "Grasim Industries Limited",
+        "isin": "INE047A01021",
+        "sector": "Cement & Cement Products",
+        "weight": 0.02
+      },
+      {
+        "name": "IDFC First Bank Limited",
+        "isin": "INE092T01019",
+        "sector": "Banks",
+        "weight": 0.02
+      },
+      {
+        "name": "Bank of Baroda",
+        "isin": "INE028A01039",
+        "sector": "Banks",
+        "weight": 0.02
+      },
+      {
+        "name": "Bandhan Bank Limited",
+        "isin": "INE545U01014",
+        "sector": "Banks",
+        "weight": 0.02
+      },
+      {
+        "name": "GMR Airports Limited",
+        "isin": "INE776C01039",
+        "sector": "Transport Infrastructure",
+        "weight": 0.02
+      },
+      {
+        "name": "Divi's Laboratories Limited",
+        "isin": "INE361B01024",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "weight": 0.02
+      },
+      {
+        "name": "JSW Steel Limited",
+        "isin": "INE019A01038",
+        "sector": "Ferrous Metals",
+        "weight": 0.02
+      },
+      {
+        "name": "Oil & Natural Gas Corporation Limited",
+        "isin": "INE213A01029",
+        "sector": "Oil",
+        "weight": 0.02
+      },
+      {
+        "name": "Tata Consumer Products Limited",
+        "isin": "INE192A01025",
+        "sector": "Agricultural Food & other Products",
+        "weight": 0.01
+      },
+      {
+        "name": "Hindustan Petroleum Corporation Limited",
+        "isin": "INE094A01015",
+        "sector": "Petroleum Products",
+        "weight": 0.01
+      },
+      {
+        "name": "Indus Towers Limited",
+        "isin": "INE121J01017",
+        "sector": "Telecom - Services",
+        "weight": 0.01
+      },
+      {
+        "name": "Eicher Motors Limited",
+        "isin": "INE066A01021",
+        "sector": "Automobiles",
+        "weight": 0.01
+      },
+      {
+        "name": "Indian Oil Corporation Limited",
+        "isin": "INE242A01010",
+        "sector": "Petroleum Products",
+        "weight": 0.01
+      },
+      {
+        "name": "NMDC Limited",
+        "isin": "INE584A01023",
+        "sector": "Minerals & Mining",
+        "weight": 0.01
+      },
+      {
+        "name": "The Indian Hotels Company Limited",
+        "isin": "INE053A01029",
+        "sector": "Leisure Services",
+        "weight": 0.01
+      },
+      {
+        "name": "Shriram Finance Limited",
+        "isin": "INE721A01047",
+        "sector": "Finance",
+        "weight": 0.01
+      },
+      {
+        "name": "Steel Authority of India Limited",
+        "isin": "INE114A01011",
+        "sector": "Ferrous Metals",
+        "weight": 0.01
+      },
+      {
+        "name": "IIFL Finance Limited",
+        "isin": "INE530B01024",
+        "sector": "Finance",
+        "weight": 0.01
+      },
+      {
+        "name": "Indian Railway Catering And Tourism Corporation Limited",
+        "isin": "INE335Y01020",
+        "sector": "Leisure Services",
+        "weight": 0.01
+      },
+      {
+        "name": "Bharat Heavy Electricals Limited",
+        "isin": "INE257A01026",
+        "sector": "Electrical Equipment",
+        "weight": 0.01
+      },
+      {
+        "name": "United Spirits Limited",
+        "isin": "INE854D01024",
+        "sector": "Beverages",
+        "weight": 0.01
+      }
+    ],
+    "equity_foreign": [
+      {
+        "name": "Alphabet Inc A",
+        "isin": "US02079K3059",
+        "sector": "Computer Software: Programming, Data Processing ##",
+        "weight": 4.17
+      },
+      {
+        "name": "Meta Platforms Registered Shares A",
+        "isin": "US30303M1027",
+        "sector": "Computer Software: Programming, Data Processing ##",
+        "weight": 2.64
+      },
+      {
+        "name": "Microsoft Corp",
+        "isin": "US5949181045",
+        "sector": "Computer Software: Prepackaged Software ##",
+        "weight": 2.49
+      },
+      {
+        "name": "Amazon Com Inc",
+        "isin": "US0231351067",
+        "sector": "Catalog/Specialty Distribution ##",
+        "weight": 2.21
+      }
+    ],
+    "reits": [
+      {
+        "name": "Embassy Office Parks REIT",
+        "isin": "INE041025011",
+        "sector": "Realty",
+        "weight": 0.57
+      },
+      {
+        "name": "Brookfield India Real Estate Trust",
+        "isin": "INE0FDU25010",
+        "sector": "Realty",
+        "weight": 0.11
+      },
+      {
+        "name": "Mindspace Business Parks REIT",
+        "isin": "INE0CCU25019",
+        "sector": "Realty",
+        "weight": 0.03
+      }
+    ],
+    "debt": [
+      {
+        "name": "Kotak Mahindra Bank Limited (24/09/2026)",
+        "isin": "INE237AD6042",
+        "sector": "CRISIL A1+",
+        "weight": 0.51
+      },
+      {
+        "name": "Axis Bank Limited (11/08/2026)",
+        "isin": "INE238AD6BD9",
+        "sector": "CRISIL A1+",
+        "weight": 0.48
+      },
+      {
+        "name": "Bank of Baroda (16/09/2026)",
+        "isin": "INE028A16KC6",
+        "sector": "IND A1+",
+        "weight": 0.48
+      },
+      {
+        "name": "Canara Bank (12/06/2026)",
+        "isin": "INE476A16E20",
+        "sector": "CRISIL A1+",
+        "weight": 0.45
+      },
+      {
+        "name": "Punjab National Bank (05/12/2025) #",
+        "isin": "INE160A16QM3",
+        "sector": "CRISIL A1+",
+        "weight": 0.42
+      },
+      {
+        "name": "Union Bank of India (25/06/2026) #",
+        "isin": "INE692A16JQ1",
+        "sector": "ICRA A1+",
+        "weight": 0.39
+      },
+      {
+        "name": "HDFC Bank Limited (10/09/2026)",
+        "isin": "INE040A16HL8",
+        "sector": "CRISIL A1+",
+        "weight": 0.37
+      },
+      {
+        "name": "National Bank For Agriculture and Rural Development (18/09/2026)",
+        "isin": "INE261F16AB5",
+        "sector": "CRISIL A1+",
+        "weight": 0.37
+      },
+      {
+        "name": "Small Industries Dev Bank of India (05/05/2026)",
+        "isin": "INE556F16BH3",
+        "sector": "CRISIL A1+",
+        "weight": 0.36
+      },
+      {
+        "name": "HDFC Bank Limited (24/06/2026)",
+        "isin": "INE040A16HB9",
+        "sector": "CRISIL A1+",
+        "weight": 0.3
+      },
+      {
+        "name": "Canara Bank (11/11/2026)",
+        "isin": "INE476A16E38",
+        "sector": "CRISIL A1+",
+        "weight": 0.29
+      },
+      {
+        "name": "Indian Bank (12/06/2026)",
+        "isin": "INE562A16PB5",
+        "sector": "CRISIL A1+",
+        "weight": 0.26
+      },
+      {
+        "name": "National Bank For Agriculture and Rural Development (22/01/2026)",
+        "isin": "INE261F16900",
+        "sector": "CRISIL A1+",
+        "weight": 0.25
+      },
+      {
+        "name": "Bank of Baroda (23/07/2026)",
+        "isin": "INE028A16JF1",
+        "sector": "IND A1+",
+        "weight": 0.24
+      },
+      {
+        "name": "Indian Bank (06/03/2026)",
+        "isin": "INE562A16OG7",
+        "sector": "CRISIL A1+",
+        "weight": 0.23
+      },
+      {
+        "name": "Axis Bank Limited (11/06/2026) #",
+        "isin": "INE238AD6AT7",
+        "sector": "CRISIL A1+",
+        "weight": 0.22
+      },
+      {
+        "name": "Indian Bank (28/07/2026)",
+        "isin": "INE562A16PE9",
+        "sector": "CRISIL A1+",
+        "weight": 0.22
+      },
+      {
+        "name": "Small Industries Dev Bank of India (24/09/2026)",
+        "isin": "INE556F16BK7",
+        "sector": "CRISIL A1+",
+        "weight": 0.22
+      },
+      {
+        "name": "Small Industries Dev Bank of India (13/10/2026)",
+        "isin": "INE556F16BL5",
+        "sector": "CRISIL A1+",
+        "weight": 0.22
+      },
+      {
+        "name": "Indian Bank (30/10/2026)",
+        "isin": "INE562A16PU5",
+        "sector": "CRISIL A1+",
+        "weight": 0.22
+      },
+      {
+        "name": "Canara Bank (27/02/2026) #",
+        "isin": "INE476A16D96",
+        "sector": "CRISIL A1+",
+        "weight": 0.19
+      },
+      {
+        "name": "Bank of Baroda (16/10/2026)",
+        "isin": "INE028A16KE2",
+        "sector": "IND A1+",
+        "weight": 0.18
+      },
+      {
+        "name": "National Bank For Agriculture and Rural Development (20/01/2026)",
+        "isin": "INE261F16892",
+        "sector": "CRISIL A1+",
+        "weight": 0.17
+      },
+      {
+        "name": "HDFC Bank Limited (19/05/2026)",
+        "isin": "INE040A16GW7",
+        "sector": "CRISIL A1+",
+        "weight": 0.17
+      },
+      {
+        "name": "Kotak Mahindra Bank Limited (04/12/2025)",
+        "isin": "INE237A168Y2",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Punjab National Bank (08/01/2026)",
+        "isin": "INE160A16QT8",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Union Bank of India (16/01/2026) #",
+        "isin": "INE692A16IK6",
+        "sector": "ICRA A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Canara Bank (04/03/2026)",
+        "isin": "INE476A16A73",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Punjab National Bank (18/03/2026) #",
+        "isin": "INE160A16RK5",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Indian Bank (06/05/2026)",
+        "isin": "INE562A16OS2",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Kotak Mahindra Bank Limited (25/05/2026)",
+        "isin": "INE237AD6083",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Axis Bank Limited (12/06/2026)",
+        "isin": "INE238AD6AU5",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Kotak Mahindra Bank Limited (11/12/2025)",
+        "isin": "INE237A160Z6",
+        "sector": "CRISIL A1+",
+        "weight": 0.13
+      },
+      {
+        "name": "HDFC Bank Limited (24/03/2026)",
+        "isin": "INE040A16GS5",
+        "sector": "CRISIL A1+",
+        "weight": 0.13
+      },
+      {
+        "name": "Axis Bank Limited (25/06/2026)",
+        "isin": "INE238AD6AZ4",
+        "sector": "CRISIL A1+",
+        "weight": 0.13
+      },
+      {
+        "name": "Small Industries Dev Bank of India (13/01/2026)",
+        "isin": "INE556F16AY0",
+        "sector": "CARE A1+",
+        "weight": 0.11
+      },
+      {
+        "name": "Small Industries Dev Bank of India (09/07/2026)",
+        "isin": "INE556F16BJ9",
+        "sector": "CARE A1+",
+        "weight": 0.11
+      },
+      {
+        "name": "Bank of Baroda (25/11/2026)",
+        "isin": "INE028A16KK9",
+        "sector": "IND A1+",
+        "weight": 0.11
+      },
+      {
+        "name": "Union Bank of India (05/12/2025) #",
+        "isin": "INE692A16ID1",
+        "sector": "ICRA A1+",
+        "weight": 0.08
+      },
+      {
+        "name": "Punjab National Bank (16/01/2026)",
+        "isin": "INE160A16QV4",
+        "sector": "CARE A1+",
+        "weight": 0.08
+      },
+      {
+        "name": "Kotak Mahindra Bank Limited (13/03/2026)",
+        "isin": "INE237A167Z1",
+        "sector": "CRISIL A1+",
+        "weight": 0.08
+      },
+      {
+        "name": "Bank of Baroda (25/05/2026)",
+        "isin": "INE028A16JR6",
+        "sector": "IND A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "HDFC Bank Limited (04/06/2026)",
+        "isin": "INE040A16HT1",
+        "sector": "CARE A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "HDFC Bank Limited (12/06/2026)",
+        "isin": "INE040A16HP9",
+        "sector": "CARE A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "Axis Bank Limited (10/08/2026)",
+        "isin": "INE238AD6BC1",
+        "sector": "CRISIL A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "Small Industries Dev Bank of India (10/11/2026)",
+        "isin": "INE556F16BR2",
+        "sector": "CARE A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "HDFC Bank Limited (13/11/2026)",
+        "isin": "INE040A16HW5",
+        "sector": "CRISIL A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "Punjab National Bank (26/02/2026)",
+        "isin": "INE160A16TO3",
+        "sector": "CRISIL A1+",
+        "weight": 0.06
+      },
+      {
+        "name": "Indian Bank (08/01/2026)",
+        "isin": "INE562A16NV8",
+        "sector": "CRISIL A1+",
+        "weight": 0.04
+      },
+      {
+        "name": "Union Bank of India (29/01/2026)",
+        "isin": "INE692A16IN0",
+        "sector": "IND A1+",
+        "weight": 0.04
+      },
+      {
+        "name": "National Bank For Agriculture and Rural Development (25/06/2026)",
+        "isin": "INE261F14OH8",
+        "sector": "CRISIL A1+",
+        "weight": 0.33
+      },
+      {
+        "name": "Bajaj Finance Limited (18/06/2026)",
+        "isin": "INE296A14A81",
+        "sector": "CRISIL A1+",
+        "weight": 0.22
+      },
+      {
+        "name": "Bajaj Finance Limited (06/05/2026)",
+        "isin": "INE296A14A32",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "Bajaj Finance Limited (26/05/2026)",
+        "isin": "INE296A14A73",
+        "sector": "CRISIL A1+",
+        "weight": 0.15
+      },
+      {
+        "name": "ICICI Securities Limited (15/06/2026)",
+        "isin": "INE763G14C53",
+        "sector": "CRISIL A1+",
+        "weight": 0.09
+      },
+      {
+        "name": "Kotak Securities Limited (13/02/2026)",
+        "isin": "INE028E14TO9",
+        "sector": "ICRA A1+",
+        "weight": 0.08
+      },
+      {
+        "name": "Bajaj Finance Limited (07/05/2026)",
+        "isin": "INE296A14A40",
+        "sector": "CRISIL A1+",
+        "weight": 0.07
+      },
+      {
+        "name": "364 Days Tbill (MD 15/10/2026)",
+        "isin": "IN002025Z294",
+        "sector": "Sovereign",
+        "weight": 0.26
+      },
+      {
+        "name": "364 Days Tbill (MD 04/12/2025)",
+        "isin": "IN002024Z347",
+        "sector": "Sovereign",
+        "weight": 0.23
+      },
+      {
+        "name": "364 Days Tbill (MD 29/01/2026)",
+        "isin": "IN002024Z420",
+        "sector": "Sovereign",
+        "weight": 0.15
+      },
+      {
+        "name": "364 Days Tbill (MD 30/07/2026)",
+        "isin": "IN002025Z187",
+        "sector": "Sovereign",
+        "weight": 0.08
+      },
+      {
+        "name": "364 Days Tbill (MD 16/04/2026)",
+        "isin": "IN002025Z039",
+        "sector": "Sovereign",
+        "weight": 0.08
+      },
+      {
+        "name": "Parag Parikh Liquid Fund- Direct Plan- Growth",
+        "isin": "INF879O01068",
+        "sector": "",
+        "weight": 0.51
+      },
+      {
+        "name": "Clearing Corporation of India Ltd",
+        "isin": null,
+        "sector": "",
+        "weight": 8.77
+      },
+      {
+        "name": "Net Receivables / (Payables)",
+        "isin": null,
+        "sector": "",
+        "weight": -0.1
+      },
+      {
+        "name": "GRAND TOTAL",
+        "isin": null,
+        "sector": "",
+        "weight": 100.0
+      }
+    ],
+    "stock_count": 74,
+    "top_10_weight": 47.09,
+    "cash_pct": 121.0
+  }
+}

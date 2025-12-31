@@ -14,15 +14,22 @@ db = client[DB_NAME]
 funds_col = db.fund_master
 map_col = db.scheme_benchmark_map
 
-map_col.delete_many({})
-
 # ---------------- HELPERS ----------------
 def normalize_name(name: str) -> str:
     name = name.lower()
-    name = re.sub(r"direct|regular|growth|plan|option", "", name)
-    name = re.sub(r"[^a-z0-9 ]", "", name)
+
+    # remove ONLY plan / option noise
+    name = re.sub(
+        r"(direct|regular|growth|plan|option|idcw|dividend|bonus|payout|withdrawal)",
+        "",
+        name,
+    )
+
+    name = re.sub(r"[^a-z0-9 ]", " ", name)
     name = re.sub(r"\s+", " ", name)
+
     return name.strip()
+
 
 # ---------------- LOAD FUND MASTER ----------------
 fund_lookup = {}
@@ -33,7 +40,8 @@ print(f"Loaded {len(fund_lookup)} fund names from fund_master")
 
 # ---------------- READ EXCEL ----------------
 df = pd.read_excel(EXCEL_FILE, header=4)
-df.columns = [c.strip() for c in df.columns]
+df.columns = [str(c).strip() for c in df.columns]
+
 
 print("Detected columns:", list(df.columns))
 
@@ -59,19 +67,42 @@ for _, row in df.iterrows():
         not_found += 1
         continue
 
-    if "NIFTY" in benchmark_raw:
+    benchmark_raw = benchmark_raw.upper()
+
+    if "NIFTY 500" in benchmark_raw:
+        benchmark = "NIFTY_500"
+    elif "BSE 500" in benchmark_raw:
+        benchmark = "BSE_500"
+    elif "NIFTY 100" in benchmark_raw:
         benchmark = "NIFTY_100"
-    elif "BSE" in benchmark_raw:
+    elif "BSE 100" in benchmark_raw:
         benchmark = "BSE_100"
+    elif "NIFTY MIDCAP 150" in benchmark_raw:
+        benchmark = "NIFTY_MIDCAP_150"
+    elif "BSE MIDCAP 150" in benchmark_raw:
+        benchmark = "BSE_MIDCAP_150"
+    elif "NIFTY SMALLCAP 250" in benchmark_raw:
+        benchmark="NIFTY_SMALLCAP_250"
+    elif "BSE SMALLCAP 250" in benchmark_raw:
+        benchmark = "BSE_SMALLCAP_250"
+    elif "NIFTY MULTICAP 500" in benchmark_raw:
+        benchmark = "NIFTY_MULTICAP_500"
     else:
         continue
 
-    map_col.insert_one({
-        "scheme_code": scheme_code,
-        "scheme_name": scheme_name,
-        "benchmark": benchmark,
-        "source": "CRISIL"
-    })
+
+    map_col.update_one(
+    { "scheme_code": scheme_code },
+    {
+        "$set": {
+            "scheme_name": scheme_name,
+            "benchmark": benchmark,
+            "source": "CRISIL"
+        }
+    },
+    upsert=True
+)
+
     inserted += 1
 
 print("✅ Scheme–benchmark mapping ingested")

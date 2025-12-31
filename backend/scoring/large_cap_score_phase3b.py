@@ -12,8 +12,8 @@ ROLLING_WINDOWS = {
 }
 
 MIN_POINTS = {
-    "3y": 30,
-    "5y": 50
+    "3y": 20,
+    "5y": 2
 }
 
 # =========================
@@ -23,8 +23,49 @@ client = MongoClient("mongodb://localhost:27017")
 db = client["mfscreener"]
 
 nav_col = db["nav_history"]
-score_consistency_col = db["score_large_cap_consistency"]
-score_main_col = db["score_large_cap"]
+
+# =========================
+# CATEGORY CONFIG
+# =========================
+CATEGORY_CONFIG = {
+    "Large Cap": {
+        "score_main": "score_large_cap",
+        "score_consistency": "score_large_cap_consistency"
+    },
+    "Flexi Cap": {
+        "score_main": "score_flexi_cap",
+        "score_consistency": "score_flexi_cap_consistency"
+    },
+    "Mid Cap": {
+        "score_main": "score_mid_cap",
+        "score_consistency": "score_mid_cap_consistency"
+    },
+    "Small Cap": {
+        "score_main": "score_small_cap",
+        "score_consistency": "score_small_cap_consistency"
+    },
+    "Multi Cap": {
+        "score_main": "score_multi_cap",
+        "score_consistency": "score_multi_cap_consistency"
+    },
+    "Value": {
+        "score_main": "score_value_cap",
+        "score_consistency": "score_value_cap_consistency"
+    },
+    "ELSS": {
+        "score_main": "score_elss_cap",
+        "score_consistency": "score_elss_cap_consistency"
+    },
+    "Contra": {
+        "score_main": "score_contra_cap",
+        "score_consistency": "score_contra_cap_consistency"
+    },
+    "Focused": {
+        "score_main": "score_focused_cap",
+        "score_consistency": "score_focused_cap_consistency"
+    }
+
+}
 
 # =========================
 # HELPERS
@@ -40,8 +81,11 @@ def fetch_monthly_nav(scheme_code):
     if df.empty:
         return None
 
-    df["date"] = pd.to_datetime(df["date"])
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df.dropna(subset=["date"])
     df = df.sort_values("date")
+
+    # Month-end NAV (NO forward fill)
     df["month"] = df["date"].dt.to_period("M")
     df = df.groupby("month").last().reset_index()
 
@@ -50,23 +94,35 @@ def fetch_monthly_nav(scheme_code):
 
 def rolling_cagr(series, window):
     values = []
+    years = window / 12
+
     for i in range(window, len(series)):
         start = series.iloc[i - window]
         end = series.iloc[i]
-        years = window / 12
-        if start > 0:
+
+        if start > 0 and end > 0:
             values.append((end / start) ** (1 / years) - 1)
+
     return values
 
 
 # =========================
-# MAIN RUNNER
+# PHASE-3B RUNNER
 # =========================
-def run_phase_3b():
+def run_phase_3b_for_category(category):
+    if category not in CATEGORY_CONFIG:
+        raise ValueError(f"Unsupported category: {category}")
+
+    score_main_col = db[CATEGORY_CONFIG[category]["score_main"]]
+    score_consistency_col = db[CATEGORY_CONFIG[category]["score_consistency"]]
+
     updated = 0
     skipped = 0
 
-    schemes = score_main_col.find({}, {"scheme_code": 1})
+    schemes = score_main_col.find(
+        {"phase3a_status": "eligible"},
+        {"scheme_code": 1}
+    )
 
     for s in schemes:
         scheme_code = s["scheme_code"]
@@ -77,7 +133,6 @@ def run_phase_3b():
             continue
 
         nav_series = df["nav"]
-
         consistency = {}
 
         for label, window in ROLLING_WINDOWS.items():
@@ -93,6 +148,7 @@ def run_phase_3b():
                 "observations": len(values)
             }
 
+        # No valid rolling window → skip (by policy)
         if not consistency:
             skipped += 1
             continue
@@ -102,6 +158,7 @@ def run_phase_3b():
             {
                 "$set": {
                     "scheme_code": scheme_code,
+                    "category": category,
                     "consistency": consistency,
                     "meta": {
                         "frequency": "monthly",
@@ -114,13 +171,14 @@ def run_phase_3b():
 
         updated += 1
 
-    print("✅ Phase 3B complete")
+    print(f"✅ Phase-3B complete for {category}")
     print("Updated:", updated)
     print("Skipped:", skipped)
 
 
 # =========================
-# ENTRY
+# ENTRY POINT
 # =========================
 if __name__ == "__main__":
-    run_phase_3b()
+    
+    run_phase_3b_for_category("Focused")

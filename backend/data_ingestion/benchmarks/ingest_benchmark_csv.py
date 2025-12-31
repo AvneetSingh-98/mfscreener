@@ -59,3 +59,10 @@ def ingest(csv_path, benchmark_code):
 if __name__ == "__main__":
     ingest("NIFTY100.csv", "NIFTY_100")
     ingest("BSE100.csv", "BSE_100")
+    ingest("NIFTY500.csv", "NIFTY_500")
+    ingest("BSE500.csv", "BSE_500")
+    ingest("NIFTYMIDCAP150.csv","NIFTY_MIDCAP_150")
+    ingest("BSEMIDCAP150.csv","BSE_MIDCAP_150")
+    ingest("BSESMALLCAP250.CSV","BSE_SMALLCAP_250")
+    ingest("NIFTYSMALLCAP250.CSV","NIFTY_SMALLCAP_250")
+    ingest("NIFTY500MULTICAP.csv","NIFTY_MULTICAP_500")
