@@ -1,0 +1,162 @@
+import pandas as pd
+import math
+from collections import defaultdict
+
+# =====================================================
+# SECTIONS
+# =====================================================
+
+SECTION_EQUITY = "equity"
+SECTION_DEBT = "debt"
+SECTION_REITS = "reits"
+SECTION_DERIVATIVES = "derivatives"
+SECTION_CASH = "cash"
+
+INVALID_PREFIXES = (
+    "sub total",
+    "total",
+    "grand total",
+    "net receivables",
+    "net payables",
+)
+
+# =====================================================
+# HELPERS
+# =====================================================
+
+def is_valid_isin(isin: str) -> bool:
+    if not isin:
+        return False
+    isin = str(isin).strip().upper()
+    return len(isin) == 12 and isin.isalnum()
+
+def normalize(text):
+    return str(text).lower().strip()
+
+# =====================================================
+# MAIN PARSER (SBI-STYLE)
+# =====================================================
+
+def parse_absl_portfolio_excel(xls_path, sheet_name):
+
+    df = pd.read_excel(xls_path, sheet_name=sheet_name, header=None)
+
+    holdings = []
+    section_summary = defaultdict(list)
+
+    header_row = None
+    col_map = {}
+
+    current_section = None
+
+    for i, row in df.iterrows():
+
+        row_text = " ".join(
+            normalize(x) for x in row.values if pd.notna(x)
+        )
+
+        # =================================================
+        # HEADER DETECTION (STRICT)
+        # =================================================
+        if (
+            "name of the instrument" in row_text
+            and "isin" in row_text
+            and "% to net assets" in row_text
+        ):
+            header_row = i
+            for idx, val in enumerate(row.values):
+                key = normalize(val)
+                if "name of the instrument" in key:
+                    col_map["name"] = idx
+                elif key == "isin":
+                    col_map["isin"] = idx
+                elif "industry" in key:
+                    col_map["sector"] = idx
+                elif "% to net assets" in key:
+                    col_map["weight"] = idx
+            continue
+
+        if header_row is None:
+            continue
+
+        # =================================================
+        # SECTION SWITCHING
+        # =================================================
+
+        if "equity & equity related" in row_text:
+            current_section = SECTION_EQUITY
+            continue
+
+        if "debt instruments" in row_text or "money market instruments" in row_text:
+            current_section = SECTION_DEBT
+            continue
+
+        if "treps" in row_text or "reverse repo" in row_text:
+            current_section = SECTION_CASH
+            continue
+
+        if "margin (future" in row_text or "derivatives" in row_text:
+            current_section = SECTION_DERIVATIVES
+            continue
+
+        if "reit" in row_text or "invit" in row_text:
+            current_section = SECTION_REITS
+            continue
+
+        # =================================================
+        # DATA ROW
+        # =================================================
+        try:
+            name = row.iloc[col_map["name"]]
+            isin = row.iloc[col_map["isin"]] if "isin" in col_map else None
+            sector = row.iloc[col_map.get("sector", -1)]
+            weight = row.iloc[col_map["weight"]]
+        except Exception:
+            continue
+
+        if pd.isna(name) or pd.isna(weight):
+            continue
+
+        name = str(name).strip()
+        sector = str(sector).strip() if pd.notna(sector) else ""
+
+        if normalize(name).startswith(INVALID_PREFIXES):
+            continue
+
+        # ISIN validation (skip for derivatives/cash)
+        if current_section in (SECTION_EQUITY, SECTION_DEBT, SECTION_REITS):
+            if not is_valid_isin(isin):
+                continue
+        else:
+            isin = None
+
+        # weight
+        try:
+         weight = float(weight)
+        except:
+         continue
+
+        if not math.isfinite(weight) or weight <= 0:
+           continue
+
+       # ABSL weights are FRACTIONS → convert to %
+        if weight <= 1:
+          weight = weight * 100
+
+
+        weight = round(weight, 4)
+
+        holding = {
+            "isin": isin,
+            "company": name,
+            "sector": sector,
+            "weight": weight,
+            "weight_num": weight,
+            "section": current_section
+        }
+
+        idx = len(holdings)
+        holdings.append(holding)
+        section_summary[current_section].append(idx)
+
+    return holdings, dict(section_summary)
