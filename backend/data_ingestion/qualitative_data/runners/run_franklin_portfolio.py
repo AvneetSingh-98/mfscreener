@@ -1,15 +1,22 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 
 from extractors.franklin_fund_registry import FRANKLIN_FUND_REGISTRY
 from extractors.franklin_portfolio_excel import parse_franklin_portfolio_excel
 
-XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-11\Franklin Templeton\Franklin_Portfolio.xlsx"
+XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-12\Franklin Templeton\Franklin_Portfolio.xlsx"
 
 AMC = "Franklin Templeton Mutual Fund"
-AS_OF = "2025-09-30"
+AS_OF = "2025-12-31"
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 col = db["portfolio_holdings_v2"]
 

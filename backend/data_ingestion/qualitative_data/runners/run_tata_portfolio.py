@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 
@@ -5,12 +8,16 @@ from extractors.tata_fund_registry import TATA_FUND_REGISTRY
 from extractors.tata_index_resolver import resolve_tata_sheet
 from extractors.tata_portfolio_excel import parse_tata_portfolio_excel
 
-XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-11\Tata\Tata_Portfolio.xlsx"
+XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-12\Tata\Tata_Portfolio.xlsx"
 
 AMC = "Tata Mutual Fund"
-AS_OF = "2025-11-30"
+AS_OF = "2025-12-31"
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 col = db["portfolio_holdings_v2"]
 
@@ -19,11 +26,8 @@ for fund_key, meta in TATA_FUND_REGISTRY.items():
     print("=" * 60)
     print(f"🚀 Running TATA fund : {fund_key}")
 
-    sheet_name = resolve_tata_sheet(
-    XLS_PATH,
-    fund_key,
-    meta["keyword"]
-    )
+    sheet_name = meta["sheet"]
+    
 
     print(f"📄 Sheet resolved : {sheet_name}")
 

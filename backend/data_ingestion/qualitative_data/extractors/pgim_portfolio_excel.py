@@ -5,6 +5,9 @@ from collections import defaultdict
 SECTION_EQUITY = "equity"
 SECTION_DEBT = "debt"
 SECTION_DERIVATIVES = "derivatives"
+SECTION_REITS = "reits"
+SECTION_OTHERS = "others"
+SECTION_CASH = "cash"
 
 INVALID_PREFIXES = (
     "sub total",
@@ -85,22 +88,55 @@ def parse_pgim_portfolio_excel(xls_path, sheet_name):
             normalize(x) for x in row.values if pd.notna(x)
         )
 
-        # -------- SECTION SWITCH --------
+         # SECTION SWITCHING
+        # =================================================
+        # =================================================
+
         if "equity & equity related" in row_text:
-            current_section = SECTION_EQUITY
-            continue
+           current_section = SECTION_EQUITY
+           continue
+        # ETFs -> Others
+        if "exchange traded funds" in row_text:
+          current_section = SECTION_OTHERS
+          continue
 
-        if any(x in row_text for x in [
-            "debt instruments",
-            "money market instruments"
-        ]):
-            current_section = SECTION_DEBT
-            continue
+        if "etf" in row_text:
+          current_section = SECTION_OTHERS
 
-        if "derivatives" in row_text:
-            current_section = SECTION_DERIVATIVES
-            continue
 
+        if "mutual fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "alternative investment fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "debt instruments" in row_text or "money market instruments" in row_text:
+           current_section = SECTION_DEBT
+           continue
+        
+
+        if "treps" in row_text or "reverse repo" in row_text:
+           current_section = SECTION_CASH
+           continue
+
+        if "margin (future" in row_text or "derivatives" in row_text:
+           current_section = SECTION_DERIVATIVES
+           continue
+
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+            or "infrastructure investment trust" in row_text
+        ):
+         current_section = SECTION_REITS
+         continue
+
+        if current_section is None:
+          current_section = SECTION_OTHERS
         # -------- DATA ROW --------
         name = row.iloc[COL_NAME]
         isin = row.iloc[COL_ISIN]
@@ -122,7 +158,7 @@ def parse_pgim_portfolio_excel(xls_path, sheet_name):
         except:
             continue
 
-        if not math.isfinite(weight) or weight <= 0:
+        if not math.isfinite(weight) :
             continue
 
         # PGIM gives direct %

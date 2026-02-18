@@ -1,20 +1,44 @@
 import pandas as pd
+import math
+from collections import defaultdict
+
+# =========================
+# SECTIONS
+# =========================
+
+SECTION_EQUITY = "equity"
+SECTION_DEBT = "debt"
+SECTION_REITS = "reits"
+SECTION_DERIVATIVES = "derivatives"
+SECTION_CASH = "cash"
+SECTION_OTHERS = "others"
+
+# =========================
+# FILTERS
+# =========================
 
 INVALID_PREFIXES = (
     "equity",
     "listed",
     "awaiting",
     "subtotal",
+    "sub total",
     "total",
     "grand total",
-    "money market",
-    "treps",
-    "repo",
-    "reverse repo",
-    "net receivable",
-    "payable",
-    "accrued",
+    "net current",
+    "portfolio classification",
 )
+
+INVALID_CONTAINS = (
+    "sub total",
+    "subtotal",
+    "grand total",
+    "total",
+)
+
+# =========================
+# HELPERS
+# =========================
 
 def normalize(text):
     return str(text).lower().replace("\n", " ").strip()
@@ -36,13 +60,38 @@ def find_col(columns, keywords):
     return None
 
 def is_valid_isin(val):
-    return isinstance(val, str) and val.strip().upper().startswith("INE")
+    if not val:
+        return False
+    val = str(val).strip().upper()
+    return len(val) == 12 and val.isalnum()
 
 def is_noise_company(name):
     name = normalize(name)
-    return any(k in name for k in INVALID_PREFIXES)
+
+    if name.startswith(INVALID_PREFIXES):
+        return True
+
+    for k in INVALID_CONTAINS:
+        if k in name:
+            return True
+
+    return False
+
+def is_reit(name, sector):
+    text = f"{name} {sector}".lower()
+    return any(x in text for x in [
+        "reit",
+        "invit",
+        "real estate investment trust",
+        "infrastructure investment trust"
+    ])
+
+# =========================
+# MAIN PARSER
+# =========================
 
 def parse_mirae_portfolio(xls_path, sheet_name):
+
     df = pd.read_excel(xls_path, sheet_name=sheet_name, header=None)
 
     header_row = find_header_row(df)
@@ -61,32 +110,112 @@ def parse_mirae_portfolio(xls_path, sheet_name):
         raise ValueError("❌ Required columns missing")
 
     holdings = []
+    section_summary = defaultdict(list)
+
+    current_section = SECTION_EQUITY
+
+    # =========================
+    # ROW LOOP
+    # =========================
 
     for _, row in df.iterrows():
-        isin = str(row[col_isin]).strip()
 
-        if not is_valid_isin(isin):
+        row_text = " ".join(
+            normalize(x) for x in row.values if pd.notna(x)
+        )
+
+        # -------------------------
+        # SECTION SWITCHING
+        # -------------------------
+
+        if "equity & equity related" in row_text:
+            current_section = SECTION_EQUITY
             continue
 
+        if "debt instruments" in row_text or "money market instruments" in row_text:
+            current_section = SECTION_DEBT
+            continue
+
+        if "exchange traded funds" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "mutual fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "treps" in row_text or "reverse repo" in row_text:
+            current_section = SECTION_CASH
+            continue
+
+        if "margin" in row_text or "derivatives" in row_text or "futures" in row_text:
+            current_section = SECTION_DERIVATIVES
+            continue
+
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+            or "infrastructure investment trust" in row_text
+        ):
+            current_section = SECTION_REITS
+            continue
+
+        # -------------------------
+        # DATA EXTRACTION
+        # -------------------------
+
         company = str(row[col_company]).strip()
-        if is_noise_company(company):
+        isin_raw = row[col_isin]
+        sector = str(row[col_sector]).strip() if col_sector else ""
+        weight_raw = row[col_weight]
+
+        if not company or is_noise_company(company):
             continue
 
         try:
-            weight = float(row[col_weight])
+            weight = float(str(weight_raw).replace("%", "").strip())
         except:
             continue
 
-        if weight <= 0:
+        if weight <= 0 or not math.isfinite(weight):
             continue
 
-        holdings.append({
+        # -------------------------
+        # ISIN HANDLING (TWEAK)
+        # -------------------------
+
+        if is_valid_isin(isin_raw):
+            isin = str(isin_raw).strip()
+        else:
+            isin = None
+
+        # Equity must have ISIN
+        if current_section == SECTION_EQUITY and not isin:
+            continue
+
+        # -------------------------
+        # FINAL SECTION OVERRIDE
+        # -------------------------
+
+        if is_reit(company, sector):
+            section = SECTION_REITS
+        else:
+            section = current_section
+
+        holding = {
             "isin": isin,
             "company": company,
-            "sector": str(row[col_sector]).strip() if col_sector else None,
+            "sector": sector,
             "weight": round(weight, 6),
             "weight_num": round(weight, 6),
-            "section": "equity"
-        })
+            "section": section
+        }
 
-    return holdings
+        idx = len(holdings)
+        holdings.append(holding)
+        section_summary[section].append(idx)
+
+    return holdings, dict(section_summary)
+

@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 
@@ -5,12 +8,16 @@ from extractors.edelweiss_fund_registry import EDELWEISS_FUND_REGISTRY
 from extractors.edelweiss_index_resolver import resolve_edelweiss_sheet
 from extractors.edelweiss_portfolio_excel import parse_edelweiss_portfolio_excel
 
-XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-11\Edelweiss\Eelweiss_Portfolio.xlsx"
+XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-12\Edelweiss\Edelweiss_Portfolio.xlsx"
 
 AMC = "Edelweiss Mutual Fund"
-AS_OF = "2025-11-30"
+AS_OF = "2025-12-31"
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 col = db["portfolio_holdings_v2"]
 

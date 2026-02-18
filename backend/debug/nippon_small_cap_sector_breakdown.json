@@ -1,0 +1,1267 @@
+{
+  "capital markets": [
+    {
+      "company": "Multi Commodity Exchange of India Limited",
+      "isin": "INE745G01035",
+      "weight": 2.72
+    },
+    {
+      "company": "KFin Technologies Limited",
+      "isin": "INE138Y01010",
+      "weight": 0.61
+    },
+    {
+      "company": "Central Depository Services (India) Limited",
+      "isin": "INE736A01011",
+      "weight": 0.6
+    },
+    {
+      "company": "ICRA Limited",
+      "isin": "INE725G01011",
+      "weight": 0.57
+    },
+    {
+      "company": "CARE Ratings Limited",
+      "isin": "INE752H01013",
+      "weight": 0.33
+    },
+    {
+      "company": "Aditya Birla Sun Life AMC Limited",
+      "isin": "INE404A01024",
+      "weight": 0.29
+    },
+    {
+      "company": "UTI Asset Management Company Limited",
+      "isin": "INE094J01016",
+      "weight": 0.25
+    },
+    {
+      "company": "Canara Robeco Asset Management Company Ltd",
+      "isin": "INE218I01013",
+      "weight": 0.22
+    },
+    {
+      "company": "National Securities Depository Limited",
+      "isin": "INE301O01023",
+      "weight": 0.07
+    }
+  ],
+  "banks": [
+    {
+      "company": "HDFC Bank Limited",
+      "isin": "INE040A01034",
+      "weight": 1.95
+    },
+    {
+      "company": "State Bank of India",
+      "isin": "INE062A01020",
+      "weight": 1.48
+    },
+    {
+      "company": "Karur Vysya Bank Limited",
+      "isin": "INE036D01028",
+      "weight": 1.38
+    },
+    {
+      "company": "Axis Bank Limited",
+      "isin": "INE238A01034",
+      "weight": 1.12
+    },
+    {
+      "company": "RBL Bank Limited",
+      "isin": "INE976G01028",
+      "weight": 0.41
+    },
+    {
+      "company": "City Union Bank Limited",
+      "isin": "INE491A01021",
+      "weight": 0.41
+    },
+    {
+      "company": "IndusInd Bank Limited",
+      "isin": "INE095A01012",
+      "weight": 0.22
+    },
+    {
+      "company": "Equitas Small Finance Bank Limited",
+      "isin": "INE063P01018",
+      "weight": 0.13
+    },
+    {
+      "company": "Union Bank of India",
+      "isin": "INE692A01016",
+      "weight": 0.11
+    }
+  ],
+  "electrical equipment": [
+    {
+      "company": "Bharat Heavy Electricals Limited",
+      "isin": "INE257A01026",
+      "weight": 1.25
+    },
+    {
+      "company": "Apar Industries Limited",
+      "isin": "INE372A01015",
+      "weight": 1.2
+    },
+    {
+      "company": "TD Power Systems Limited",
+      "isin": "INE419M01027",
+      "weight": 1.16
+    },
+    {
+      "company": "Voltamp Transformers Limited",
+      "isin": "INE540H01012",
+      "weight": 0.76
+    },
+    {
+      "company": "Avalon Technologies Limited",
+      "isin": "INE0LCL01028",
+      "weight": 0.54
+    },
+    {
+      "company": "Hitachi Energy India Limited",
+      "isin": "INE07Y701011",
+      "weight": 0.45
+    },
+    {
+      "company": "Genus Power Infrastructures Limited",
+      "isin": "INE955D01029",
+      "weight": 0.4
+    },
+    {
+      "company": "Inox Wind Limited",
+      "isin": "INE066P01011",
+      "weight": 0.25
+    },
+    {
+      "company": "Bajel Projects Limited",
+      "isin": "INE0KQN01018",
+      "weight": 0.16
+    },
+    {
+      "company": "Fujiyama Power Systems Limited",
+      "isin": "INE12UR01024",
+      "weight": 0.15
+    },
+    {
+      "company": "Saatvik Green Energy Limited",
+      "isin": "INE13B501022",
+      "weight": 0.1
+    },
+    {
+      "company": "Rishabh Instruments Ltd",
+      "isin": "INE0N2P01017",
+      "weight": 0.08
+    }
+  ],
+  "commercial services & supplies": [
+    {
+      "company": "eClerx Services Limited",
+      "isin": "INE738I01010",
+      "weight": 1.14
+    }
+  ],
+  "petroleum products": [
+    {
+      "company": "Reliance Industries Limited",
+      "isin": "INE002A01018",
+      "weight": 1.13
+    },
+    {
+      "company": "Castrol India Limited",
+      "isin": "INE172A01027",
+      "weight": 0.25
+    }
+  ],
+  "industrial products": [
+    {
+      "company": "Kirloskar Brothers Limited",
+      "isin": "INE732A01036",
+      "weight": 1.1
+    },
+    {
+      "company": "Elantas Beck India Limited",
+      "isin": "INE280B01018",
+      "weight": 0.92
+    },
+    {
+      "company": "Kirloskar Pneumatic Company Limited",
+      "isin": "INE811A01020",
+      "weight": 0.65
+    },
+    {
+      "company": "Kirloskar Oil Engines Limited",
+      "isin": "INE146L01010",
+      "weight": 0.61
+    },
+    {
+      "company": "Timken India Limited",
+      "isin": "INE325A01013",
+      "weight": 0.54
+    },
+    {
+      "company": "Carborundum Universal Limited",
+      "isin": "INE120A01034",
+      "weight": 0.41
+    },
+    {
+      "company": "Esab India Limited",
+      "isin": "INE284A01012",
+      "weight": 0.34
+    },
+    {
+      "company": "Finolex Cables Limited",
+      "isin": "INE235A01022",
+      "weight": 0.32
+    },
+    {
+      "company": "Grindwell Norton Limited",
+      "isin": "INE536A01023",
+      "weight": 0.3
+    },
+    {
+      "company": "Harsha Engineers International Limited",
+      "isin": "INE0JUS01029",
+      "weight": 0.23
+    },
+    {
+      "company": "Vesuvius India Limited",
+      "isin": "INE386A01023",
+      "weight": 0.2
+    },
+    {
+      "company": "Jindal Saw Limited",
+      "isin": "INE324A01032",
+      "weight": 0.18
+    },
+    {
+      "company": "RHI Magnesita India Limited",
+      "isin": "INE743M01012",
+      "weight": 0.13
+    },
+    {
+      "company": "Subros Ltd",
+      "isin": "INE287B01021",
+      "weight": 0.12
+    },
+    {
+      "company": "Venus Pipes And Tubes Limited",
+      "isin": "INE0JA001018",
+      "weight": 0.11
+    },
+    {
+      "company": "Polyplex Corporation Limited",
+      "isin": "INE633B01018",
+      "weight": 0.08
+    },
+    {
+      "company": "Aeroflex Industries Limited",
+      "isin": "INE024001021",
+      "weight": 0.07
+    }
+  ],
+  "food products": [
+    {
+      "company": "Zydus Wellness Limited",
+      "isin": "INE768C01028",
+      "weight": 1.06
+    },
+    {
+      "company": "Orkla India Limited",
+      "isin": "INE16NZ01023",
+      "weight": 0.67
+    },
+    {
+      "company": "Godrej Agrovet Limited",
+      "isin": "INE850D01014",
+      "weight": 0.35
+    }
+  ],
+  "diversified fmcg": [
+    {
+      "company": "ITC Limited",
+      "isin": "INE154A01025",
+      "weight": 1.05
+    },
+    {
+      "company": "Hindustan Unilever Limited",
+      "isin": "INE030A01027",
+      "weight": 0.76
+    }
+  ],
+  "beverages": [
+    {
+      "company": "Radico Khaitan Limited",
+      "isin": "INE944F01028",
+      "weight": 1.04
+    },
+    {
+      "company": "Allied Blenders And Distillers Limited",
+      "isin": "INE552Z01027",
+      "weight": 0.47
+    }
+  ],
+  "auto components": [
+    {
+      "company": "Tube Investments of India Limited",
+      "isin": "INE974X01010",
+      "weight": 1.01
+    },
+    {
+      "company": "Asahi India Glass Limited",
+      "isin": "INE439A01020",
+      "weight": 0.76
+    },
+    {
+      "company": "Sundram Fasteners Limited",
+      "isin": "INE387A01021",
+      "weight": 0.69
+    },
+    {
+      "company": "Lumax Auto Technologies Limited",
+      "isin": "INE872H01027",
+      "weight": 0.56
+    },
+    {
+      "company": "Jtekt India Limited",
+      "isin": "INE643A01035",
+      "weight": 0.48
+    },
+    {
+      "company": "Craftsman Automation Limited",
+      "isin": "INE00LO01017",
+      "weight": 0.47
+    },
+    {
+      "company": "Samvardhana Motherson International Limited",
+      "isin": "INE775A01035",
+      "weight": 0.45
+    },
+    {
+      "company": "CIE Automotive India Limited",
+      "isin": "INE536H01010",
+      "weight": 0.3
+    },
+    {
+      "company": "Schaeffler India Limited",
+      "isin": "INE513A01022",
+      "weight": 0.28
+    },
+    {
+      "company": "Belrise Industries Ltd.",
+      "isin": "INE894V01022",
+      "weight": 0.26
+    },
+    {
+      "company": "LG Balakrishnan & Bros Limited",
+      "isin": "INE337A01034",
+      "weight": 0.25
+    },
+    {
+      "company": "Sansera Engineering Limited",
+      "isin": "INE953O01021",
+      "weight": 0.24
+    },
+    {
+      "company": "Sandhar Technologies Limited",
+      "isin": "INE278H01035",
+      "weight": 0.2
+    },
+    {
+      "company": "Automotive Axles Limited",
+      "isin": "INE449A01011",
+      "weight": 0.2
+    },
+    {
+      "company": "Sharda Motor Industries Ltd.",
+      "isin": "INE597I01028",
+      "weight": 0.14
+    },
+    {
+      "company": "Divgi Torqtransfer Systems Limited",
+      "isin": "INE753U01022",
+      "weight": 0.1
+    },
+    {
+      "company": "Studds Accessories Ltd",
+      "isin": "INE00Q601028",
+      "weight": 0.04
+    }
+  ],
+  "personal products": [
+    {
+      "company": "Emami Limited",
+      "isin": "INE548C01032",
+      "weight": 1.0
+    },
+    {
+      "company": "Bajaj Consumer Care Limited",
+      "isin": "INE933K01021",
+      "weight": 0.3
+    }
+  ],
+  "consumer durables": [
+    {
+      "company": "Asian Paints Limited",
+      "isin": "INE021A01026",
+      "weight": 0.97
+    },
+    {
+      "company": "Whirlpool of India Limited",
+      "isin": "INE716A01013",
+      "weight": 0.8
+    },
+    {
+      "company": "Dixon Technologies (India) Limited",
+      "isin": "INE935N01020",
+      "weight": 0.75
+    },
+    {
+      "company": "Crompton Greaves Consumer Electricals Limited",
+      "isin": "INE299U01018",
+      "weight": 0.65
+    },
+    {
+      "company": "Blue Star Limited",
+      "isin": "INE472A01039",
+      "weight": 0.52
+    },
+    {
+      "company": "Voltas Limited",
+      "isin": "INE226A01021",
+      "weight": 0.5
+    },
+    {
+      "company": "Indigo Paints Limited",
+      "isin": "INE09VQ01012",
+      "weight": 0.49
+    },
+    {
+      "company": "Bluestone Jewellery and Lifestyle Limited",
+      "isin": "INE304W01038",
+      "weight": 0.42
+    },
+    {
+      "company": "Kajaria Ceramics Limited",
+      "isin": "INE217B01036",
+      "weight": 0.4
+    },
+    {
+      "company": "Century Plyboards (India) Limited",
+      "isin": "INE348B01021",
+      "weight": 0.38
+    },
+    {
+      "company": "Orient Electric Limited",
+      "isin": "INE142Z01019",
+      "weight": 0.32
+    },
+    {
+      "company": "TTK Prestige Limited",
+      "isin": "INE690A01028",
+      "weight": 0.32
+    },
+    {
+      "company": "PG Electroplast Limited",
+      "isin": "INE457L01029",
+      "weight": 0.3
+    },
+    {
+      "company": "Bajaj Electricals Limited",
+      "isin": "INE193E01025",
+      "weight": 0.22
+    },
+    {
+      "company": "Greenlam Industries Limited",
+      "isin": "INE544R01021",
+      "weight": 0.16
+    },
+    {
+      "company": "Campus Activewear Limited",
+      "isin": "INE278Y01022",
+      "weight": 0.15
+    },
+    {
+      "company": "Pokarna Limited",
+      "isin": "INE637C01025",
+      "weight": 0.09
+    },
+    {
+      "company": "Stanley Lifestyles Limited",
+      "isin": "INE01A001028",
+      "weight": 0.08
+    },
+    {
+      "company": "Bata India Limited",
+      "isin": "INE176A01028",
+      "weight": 0.08
+    },
+    {
+      "company": "P N Gadgil Jewellers Limited",
+      "isin": "INE953R01016",
+      "weight": 0.07
+    }
+  ],
+  "power": [
+    {
+      "company": "NLC India Limited",
+      "isin": "INE589A01014",
+      "weight": 0.96
+    },
+    {
+      "company": "Tata Power Company Limited",
+      "isin": "INE245A01021",
+      "weight": 0.44
+    },
+    {
+      "company": "NTPC Green Energy Limited",
+      "isin": "INE0ONG01011",
+      "weight": 0.33
+    },
+    {
+      "company": "CESC Limited",
+      "isin": "INE486A01021",
+      "weight": 0.28
+    },
+    {
+      "company": "Acme Solar Holdings Ltd",
+      "isin": "INE622W01025",
+      "weight": 0.21
+    }
+  ],
+  "healthcare services": [
+    {
+      "company": "Aster DM Healthcare Limited",
+      "isin": "INE914M01019",
+      "weight": 0.92
+    },
+    {
+      "company": "Krishna Institute Of Medical Sciences Limited",
+      "isin": "INE967H01025",
+      "weight": 0.51
+    },
+    {
+      "company": "Healthcare Global Enterprises Limited",
+      "isin": "INE075I01017",
+      "weight": 0.47
+    },
+    {
+      "company": "Syngene International Limited",
+      "isin": "INE398R01022",
+      "weight": 0.43
+    },
+    {
+      "company": "Thyrocare Technologies Limited",
+      "isin": "INE594H01019",
+      "weight": 0.37
+    },
+    {
+      "company": "Metropolis Healthcare Limited",
+      "isin": "INE112L01020",
+      "weight": 0.32
+    },
+    {
+      "company": "Dr. Lal Path Labs Limited",
+      "isin": "INE600L01024",
+      "weight": 0.29
+    },
+    {
+      "company": "Narayana Hrudayalaya Limited",
+      "isin": "INE410P01011",
+      "weight": 0.27
+    },
+    {
+      "company": "Rainbow Childrens Medicare Limited",
+      "isin": "INE961O01016",
+      "weight": 0.15
+    }
+  ],
+  "fertilizers & agrochemicals": [
+    {
+      "company": "Paradeep Phosphates Limited",
+      "isin": "INE088F01024",
+      "weight": 0.88
+    },
+    {
+      "company": "Bayer Cropscience Limited",
+      "isin": "INE462A01022",
+      "weight": 0.38
+    },
+    {
+      "company": "Chambal Fertilizers & Chemicals Limited",
+      "isin": "INE085A01013",
+      "weight": 0.26
+    },
+    {
+      "company": "Sumitomo Chemical India Limited",
+      "isin": "INE258G01013",
+      "weight": 0.21
+    },
+    {
+      "company": "Astec LifeSciences Limited",
+      "isin": "INE563J01010",
+      "weight": 0.06
+    }
+  ],
+  "pharmaceuticals & biotechnology": [
+    {
+      "company": "Pfizer Limited",
+      "isin": "INE182A01018",
+      "weight": 0.88
+    },
+    {
+      "company": "AstraZeneca Pharma India Limited",
+      "isin": "INE203A01020",
+      "weight": 0.87
+    },
+    {
+      "company": "Sai Life Sciences Limited",
+      "isin": "INE570L01029",
+      "weight": 0.74
+    },
+    {
+      "company": "Ajanta Pharma Limited",
+      "isin": "INE031B01049",
+      "weight": 0.63
+    },
+    {
+      "company": "Procter & Gamble Health Limited",
+      "isin": "INE199A01012",
+      "weight": 0.58
+    },
+    {
+      "company": "Gland Pharma Limited",
+      "isin": "INE068V01023",
+      "weight": 0.46
+    },
+    {
+      "company": "FDC Limited",
+      "isin": "INE258B01022",
+      "weight": 0.26
+    },
+    {
+      "company": "JB Chemicals & Pharmaceuticals Limited",
+      "isin": "INE572A01036",
+      "weight": 0.26
+    },
+    {
+      "company": "Sanofi Consumer Healthcare India Limited",
+      "isin": "INE0UOS01011",
+      "weight": 0.17
+    },
+    {
+      "company": "Sanofi India Limited",
+      "isin": "INE058A01010",
+      "weight": 0.14
+    },
+    {
+      "company": "Indoco Remedies Limited",
+      "isin": "INE873D01024",
+      "weight": 0.1
+    }
+  ],
+  "agricultural food & other products": [
+    {
+      "company": "AWL Agri Business Limited",
+      "isin": "INE699H01024",
+      "weight": 0.85
+    },
+    {
+      "company": "Balrampur Chini Mills Limited",
+      "isin": "INE119A01028",
+      "weight": 0.73
+    },
+    {
+      "company": "Tata Consumer Products Limited",
+      "isin": "INE192A01025",
+      "weight": 0.63
+    }
+  ],
+  "leisure services": [
+    {
+      "company": "TBO Tek Limited",
+      "isin": "INE673O01025",
+      "weight": 0.83
+    },
+    {
+      "company": "The Indian Hotels Company Limited",
+      "isin": "INE053A01029",
+      "weight": 0.43
+    },
+    {
+      "company": "Sapphire Foods India Limited",
+      "isin": "INE806T01020",
+      "weight": 0.34
+    },
+    {
+      "company": "Lemon Tree Hotels Limited",
+      "isin": "INE970X01018",
+      "weight": 0.3
+    },
+    {
+      "company": "Leela Palaces Hotels & Resorts Limited",
+      "isin": "INE0AQ201015",
+      "weight": 0.22
+    },
+    {
+      "company": "Apeejay Surrendra Park Hotels Limited",
+      "isin": "INE988S01028",
+      "weight": 0.05
+    }
+  ],
+  "textiles & apparels": [
+    {
+      "company": "Gokaldas Exports Limited",
+      "isin": "INE887G01027",
+      "weight": 0.73
+    },
+    {
+      "company": "K.P.R. Mill Limited",
+      "isin": "INE930H01031",
+      "weight": 0.54
+    },
+    {
+      "company": "Vardhman Textiles Limited",
+      "isin": "INE825A01020",
+      "weight": 0.54
+    },
+    {
+      "company": "Raymond Lifestyle Limited",
+      "isin": "INE02ID01020",
+      "weight": 0.16
+    },
+    {
+      "company": "Sanathan Textiles Limited",
+      "isin": "INE0JPD01013",
+      "weight": 0.08
+    }
+  ],
+  "cement & cement products": [
+    {
+      "company": "The Ramco Cements Limited",
+      "isin": "INE331A01037",
+      "weight": 0.71
+    },
+    {
+      "company": "Birla Corporation Limited",
+      "isin": "INE340A01012",
+      "weight": 0.44
+    },
+    {
+      "company": "Ambuja Cements Limited",
+      "isin": "INE079A01024",
+      "weight": 0.26
+    },
+    {
+      "company": "JSW Cement Limited",
+      "isin": "INE718I01012",
+      "weight": 0.17
+    },
+    {
+      "company": "JK Lakshmi Cement Limited",
+      "isin": "INE786A01032",
+      "weight": 0.12
+    }
+  ],
+  "other consumer services": [
+    {
+      "company": "NIIT Learning Systems Limited",
+      "isin": "INE342G01023",
+      "weight": 0.71
+    },
+    {
+      "company": "PhysicsWallah Limited",
+      "isin": "INE0LP301011",
+      "weight": 0.61
+    },
+    {
+      "company": "NIIT Limited",
+      "isin": "INE161A01038",
+      "weight": 0.16
+    },
+    {
+      "company": "SIS Limited",
+      "isin": "INE285J01028",
+      "weight": 0.05
+    }
+  ],
+  "insurance": [
+    {
+      "company": "HDFC Life Insurance Company Limited",
+      "isin": "INE795G01014",
+      "weight": 0.69
+    }
+  ],
+  "construction": [
+    {
+      "company": "Kalpataru Projects International Limited",
+      "isin": "INE220B01022",
+      "weight": 0.63
+    },
+    {
+      "company": "ISGEC Heavy Engineering\u00a0Limited",
+      "isin": "INE858B01029",
+      "weight": 0.52
+    },
+    {
+      "company": "RITES Limited",
+      "isin": "INE320J01015",
+      "weight": 0.32
+    },
+    {
+      "company": "Afcons Infrastructure Limited",
+      "isin": "INE101I01011",
+      "weight": 0.31
+    },
+    {
+      "company": "H.G. Infra Engineering Limited",
+      "isin": "INE926X01010",
+      "weight": 0.28
+    },
+    {
+      "company": "G R Infraprojects Limited",
+      "isin": "INE201P01022",
+      "weight": 0.19
+    },
+    {
+      "company": "KEC International Limited",
+      "isin": "INE389H01022",
+      "weight": 0.17
+    },
+    {
+      "company": "PNC Infratech Limited",
+      "isin": "INE195J01029",
+      "weight": 0.12
+    }
+  ],
+  "finance": [
+    {
+      "company": "Mas Financial Services Limited",
+      "isin": "INE348L01012",
+      "weight": 0.63
+    },
+    {
+      "company": "TSF Investments  Limited",
+      "isin": "INE202Z01029",
+      "weight": 0.6
+    },
+    {
+      "company": "PNB Housing Finance Limited",
+      "isin": "INE572E01012",
+      "weight": 0.57
+    },
+    {
+      "company": "HDB Financial Services Limited",
+      "isin": "INE756I01012",
+      "weight": 0.39
+    },
+    {
+      "company": "Aavas Financiers Limited",
+      "isin": "INE216P01012",
+      "weight": 0.25
+    },
+    {
+      "company": "Piramal Finance Limited",
+      "isin": "INE202B01038",
+      "weight": 0.23
+    },
+    {
+      "company": "LIC Housing Finance Limited",
+      "isin": "INE115A01026",
+      "weight": 0.21
+    },
+    {
+      "company": "Can Fin Homes Limited",
+      "isin": "INE477A01020",
+      "weight": 0.21
+    },
+    {
+      "company": "CreditAccess Grameen Limited",
+      "isin": "INE741K01010",
+      "weight": 0.15
+    }
+  ],
+  "it - services": [
+    {
+      "company": "Affle 3i Limited",
+      "isin": "INE00WC01027",
+      "weight": 0.63
+    },
+    {
+      "company": "Cyient Limited",
+      "isin": "INE136B01020",
+      "weight": 0.47
+    },
+    {
+      "company": "eMudhra Limited",
+      "isin": "INE01QM01018",
+      "weight": 0.46
+    },
+    {
+      "company": "Protean eGov Technologies Limited",
+      "isin": "INE004A01022",
+      "weight": 0.11
+    }
+  ],
+  "aerospace & defense": [
+    {
+      "company": "Hindustan Aeronautics Limited",
+      "isin": "INE066F01020",
+      "weight": 0.57
+    },
+    {
+      "company": "MTAR Technologies Limited",
+      "isin": "INE864I01014",
+      "weight": 0.34
+    },
+    {
+      "company": "Bharat Dynamics Limited",
+      "isin": "INE171Z01026",
+      "weight": 0.34
+    },
+    {
+      "company": "Astra Microwave Products Limited",
+      "isin": "INE386C01029",
+      "weight": 0.3
+    },
+    {
+      "company": "Data Patterns (India) Limited",
+      "isin": "INE0IX101010",
+      "weight": 0.22
+    },
+    {
+      "company": "Mishra Dhatu Nigam Limited",
+      "isin": "INE099Z01011",
+      "weight": 0.12
+    },
+    {
+      "company": "Cyient Dlm Ltd",
+      "isin": "INE055S01018",
+      "weight": 0.08
+    }
+  ],
+  "agricultural, commercial & construction vehicles": [
+    {
+      "company": "Tata Motors Ltd",
+      "isin": "INE1TAE01010",
+      "weight": 0.56
+    },
+    {
+      "company": "V.S.T Tillers Tractors Limited",
+      "isin": "INE764D01017",
+      "weight": 0.41
+    }
+  ],
+  "it - software": [
+    {
+      "company": "Rategain Travel Technologies Limited",
+      "isin": "INE0CLI01024",
+      "weight": 0.55
+    },
+    {
+      "company": "Persistent Systems Limited",
+      "isin": "INE262H01021",
+      "weight": 0.51
+    },
+    {
+      "company": "Zensar Technologies Limited",
+      "isin": "INE520A01027",
+      "weight": 0.27
+    },
+    {
+      "company": "Sonata Software Limited",
+      "isin": "INE269A01021",
+      "weight": 0.16
+    },
+    {
+      "company": "Birlasoft Limited",
+      "isin": "INE836A01035",
+      "weight": 0.16
+    },
+    {
+      "company": "KPIT Technologies Limited",
+      "isin": "INE04I401011",
+      "weight": 0.13
+    }
+  ],
+  "diversified metals": [
+    {
+      "company": "Vedanta Limited",
+      "isin": "INE205A01025",
+      "weight": 0.53
+    }
+  ],
+  "chemicals & petrochemicals": [
+    {
+      "company": "Fine Organic Industries Limited",
+      "isin": "INE686Y01026",
+      "weight": 0.51
+    },
+    {
+      "company": "Navin Fluorine International Limited",
+      "isin": "INE048G01026",
+      "weight": 0.47
+    },
+    {
+      "company": "Clean Science and Technology Limited",
+      "isin": "INE227W01023",
+      "weight": 0.4
+    },
+    {
+      "company": "Galaxy Surfactants Limited",
+      "isin": "INE600K01018",
+      "weight": 0.4
+    },
+    {
+      "company": "Linde India Limited",
+      "isin": "INE473A01011",
+      "weight": 0.35
+    },
+    {
+      "company": "Styrenix Performance Materials Limited",
+      "isin": "INE189B01011",
+      "weight": 0.34
+    },
+    {
+      "company": "Aarti Industries Limited",
+      "isin": "INE769A01020",
+      "weight": 0.27
+    },
+    {
+      "company": "Deepak Nitrite Limited",
+      "isin": "INE288B01029",
+      "weight": 0.27
+    },
+    {
+      "company": "Gujarat Fluorochemicals Limited",
+      "isin": "INE09N301011",
+      "weight": 0.2
+    },
+    {
+      "company": "Sudarshan Chemical Industries Limited",
+      "isin": "INE659A01023",
+      "weight": 0.16
+    },
+    {
+      "company": "Archean Chemical Industries Limited",
+      "isin": "INE128X01021",
+      "weight": 0.1
+    },
+    {
+      "company": "Fineotex Chemical Limited",
+      "isin": "INE045J01034",
+      "weight": 0.05
+    }
+  ],
+  "household products": [
+    {
+      "company": "Jyothy Labs Limited",
+      "isin": "INE668F01031",
+      "weight": 0.45
+    },
+    {
+      "company": "Doms Industries Limited",
+      "isin": "INE321T01012",
+      "weight": 0.24
+    }
+  ],
+  "paper, forest & jute products": [
+    {
+      "company": "Aditya Birla Real Estate Limited",
+      "isin": "INE055A01016",
+      "weight": 0.45
+    },
+    {
+      "company": "West Coast Paper Mills Limited",
+      "isin": "INE976A01021",
+      "weight": 0.21
+    }
+  ],
+  "consumable fuels": [
+    {
+      "company": "Coal India Limited",
+      "isin": "INE522F01014",
+      "weight": 0.44
+    }
+  ],
+  "retailing": [
+    {
+      "company": "Aditya Birla Lifestyle Brands Limited",
+      "isin": "INE14LE01019",
+      "weight": 0.42
+    },
+    {
+      "company": "FSN E-Commerce Ventures Limited",
+      "isin": "INE388Y01029",
+      "weight": 0.27
+    },
+    {
+      "company": "Just Dial Limited",
+      "isin": "INE599M01018",
+      "weight": 0.17
+    },
+    {
+      "company": "Go Fashion (India) Limited",
+      "isin": "INE0BJS01011",
+      "weight": 0.16
+    },
+    {
+      "company": "Vedant Fashions Limited",
+      "isin": "INE825V01034",
+      "weight": 0.14
+    },
+    {
+      "company": "Urban Company Ltd.",
+      "isin": "INE0CAZ01013",
+      "weight": 0.09
+    },
+    {
+      "company": "Aditya Birla Fashion and Retail Limited",
+      "isin": "INE647O01011",
+      "weight": 0.09
+    },
+    {
+      "company": "Indiamart Intermesh Limited",
+      "isin": "INE933S01016",
+      "weight": 0.09
+    },
+    {
+      "company": "Credo Brands Marketing Limited",
+      "isin": "INE220Q01020",
+      "weight": 0.02
+    },
+    {
+      "company": "Vishal Mega Mart Limited",
+      "isin": "INE01EA01019",
+      "weight": 0.01
+    }
+  ],
+  "telecom - equipment & accessories": [
+    {
+      "company": "Tejas Networks Limited",
+      "isin": "INE010J01012",
+      "weight": 0.42
+    }
+  ],
+  "other utilities": [
+    {
+      "company": "ION Exchange (India) Limited",
+      "isin": "INE570A01022",
+      "weight": 0.37
+    }
+  ],
+  "industrial manufacturing": [
+    {
+      "company": "Kaynes Technology India Limited",
+      "isin": "INE918Z01012",
+      "weight": 0.35
+    },
+    {
+      "company": "Honda India Power Products Limited",
+      "isin": "INE634A01018",
+      "weight": 0.31
+    },
+    {
+      "company": "Praj Industries Limited",
+      "isin": "INE074A01025",
+      "weight": 0.23
+    },
+    {
+      "company": "Texmaco Rail & Engineering Limited",
+      "isin": "INE621L01012",
+      "weight": 0.21
+    },
+    {
+      "company": "LMW Limited",
+      "isin": "INE269B01029",
+      "weight": 0.18
+    },
+    {
+      "company": "Aditya Infotech Limited",
+      "isin": "INE819V01029",
+      "weight": 0.05
+    }
+  ],
+  "transport services": [
+    {
+      "company": "Delhivery Limited",
+      "isin": "INE148O01028",
+      "weight": 0.33
+    },
+    {
+      "company": "Blue Dart Express Limited",
+      "isin": "INE233B01017",
+      "weight": 0.14
+    },
+    {
+      "company": "Seamec Limited",
+      "isin": "INE497B01018",
+      "weight": 0.13
+    }
+  ],
+  "entertainment": [
+    {
+      "company": "PVR INOX Limited",
+      "isin": "INE191H01014",
+      "weight": 0.31
+    }
+  ],
+  "realty": [
+    {
+      "company": "Brigade Enterprises Limited",
+      "isin": "INE791I01019",
+      "weight": 0.24
+    },
+    {
+      "company": "Max Estates Limited",
+      "isin": "INE03EI01018",
+      "weight": 0.18
+    },
+    {
+      "company": "Raymond Realty Limited",
+      "isin": "INE1SY401010",
+      "weight": 0.09
+    },
+    {
+      "company": "Raymond Limited",
+      "isin": "INE301A01014",
+      "weight": 0.09
+    }
+  ],
+  "telecom - services": [
+    {
+      "company": "Vindhya Telelinks Limited",
+      "isin": "INE707A01012",
+      "weight": 0.22
+    }
+  ],
+  "automobiles": [
+    {
+      "company": "Landmark Cars Limited",
+      "isin": "INE559R01029",
+      "weight": 0.12
+    }
+  ],
+  "ferrous metals": [
+    {
+      "company": "Kirloskar Ferrous Industries Limited",
+      "isin": "INE884B01025",
+      "weight": 0.11
+    }
+  ],
+  "diversified": [
+    {
+      "company": "3M India Limited",
+      "isin": "INE470A01017",
+      "weight": 0.09
+    }
+  ],
+  "media": [
+    {
+      "company": "R K Swamy Ltd",
+      "isin": "INE0NQ801033",
+      "weight": 0.03
+    }
+  ]
+}

@@ -1,11 +1,15 @@
 import pandas as pd
 from pymongo import MongoClient, ASCENDING
 import os
+from dotenv import load_dotenv
+import certifi
 
-MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
-DB_NAME = os.environ.get("DB_NAME", "mfscreener")
+load_dotenv()
 
-client = MongoClient(MONGO_URL)
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME", "mfscreener")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client[DB_NAME]
 col = db.benchmark_nav
 
@@ -13,6 +17,14 @@ col.create_index(
     [("benchmark", ASCENDING), ("date", ASCENDING)],
     unique=True
 )
+def load_file(path):
+    if path.lower().endswith(".xlsx"):
+        return pd.read_excel(path)
+    else:
+        try:
+            return pd.read_csv(path, encoding="utf-8")
+        except:
+            return pd.read_csv(path, encoding="latin1", engine="python", on_bad_lines="skip")
 
 def detect_date_col(columns):
     for c in columns:
@@ -29,7 +41,7 @@ def detect_value_col(columns):
 def ingest(csv_path, benchmark_code):
     print(f"Ingesting {benchmark_code} from {csv_path}")
 
-    df = pd.read_csv(csv_path)
+    df = load_file(csv_path)
     df.columns = [c.strip() for c in df.columns]
 
     print("Detected columns:", list(df.columns))
@@ -54,15 +66,14 @@ def ingest(csv_path, benchmark_code):
         except:
             pass
 
-    print(f"✅ {benchmark_code}: inserted {inserted}")
+    print(f"{benchmark_code}: inserted {inserted}")
 
 if __name__ == "__main__":
-    ingest("NIFTY100.csv", "NIFTY_100")
-    ingest("BSE100.csv", "BSE_100")
-    ingest("NIFTY500.csv", "NIFTY_500")
-    ingest("BSE500.csv", "BSE_500")
-    ingest("NIFTYMIDCAP150.csv","NIFTY_MIDCAP_150")
-    ingest("BSEMIDCAP150.csv","BSE_MIDCAP_150")
-    ingest("BSESMALLCAP250.CSV","BSE_SMALLCAP_250")
-    ingest("NIFTYSMALLCAP250.CSV","NIFTY_SMALLCAP_250")
-    ingest("NIFTY500MULTICAP.csv","NIFTY_MULTICAP_500")
+    
+    ingest("NIFTY200.xlsx","NIFTY_200")
+    ingest("NIFTYFINANCIALSERVICES.csv","NIFTY_FINANCIAL_SERVICES")
+    ingest("NIFTYHEALTHCARE.xlsx","NIFTY_HEALTHCARE")
+    ingest("NIFTYINDIACONSUMPTION.xlsx","NIFTY_INDIA_CONSUMPTION")
+    ingest("NIFTYINFRASTRUCTURE.xlsx","NIFTY_INFRASTRUCTURE")
+    ingest("NIFTYIT.xlsx","NIFTY_IT")
+    ingest("NIFTY100ESG.xlsx","NIFTY_ESG_100")

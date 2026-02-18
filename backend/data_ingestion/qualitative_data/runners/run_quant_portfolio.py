@@ -1,14 +1,21 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 
 from extractors.quant_fund_registry import QUANT_FUND_REGISTRY
 from extractors.quant_portfolio_excel import parse_quant_portfolio_excel
 
-XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-11\Quant\Quant_Portfolio.xlsx"
-AS_OF = "2025-11-28"
+XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-12\Quant\Quant_Portfolio.xlsx"
+AS_OF = "2025-12-31"
 AMC = "quant Mutual Fund"
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 col = db["portfolio_holdings_v2"]
 

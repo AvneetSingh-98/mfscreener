@@ -2,13 +2,17 @@ import pandas as pd
 from pymongo import MongoClient
 import os
 import re
+from dotenv import load_dotenv
+import certifi
+
+load_dotenv()
 
 # ---------------- CONFIG ----------------
-MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
-DB_NAME = os.environ.get("DB_NAME", "mfscreener")
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME", "mfscreener")
 EXCEL_FILE = "Fund-Benchmark.xlsx"
 
-client = MongoClient(MONGO_URL)
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client[DB_NAME]
 
 funds_col = db.fund_master
@@ -87,6 +91,24 @@ for _, row in df.iterrows():
         benchmark = "BSE_SMALLCAP_250"
     elif "NIFTY MULTICAP 500" in benchmark_raw:
         benchmark = "NIFTY_MULTICAP_500"
+    elif "BSE LARGEMIDCAP 250" in benchmark_raw:
+        benchmark = "BSE_LARGEMIDCAP_250"
+    elif "NIFTY LARGEMIDCAP 250" in benchmark_raw:
+        benchmark = "NIFTY_LARGEMIDCAP_250"
+    elif "NIFTY FINANCIAL SERVICES" in benchmark_raw:
+        benchmark = "NIFTY_FINANCIAL_SERVICES"
+    elif "NIFTY HEALTHCARE" in benchmark_raw:
+        benchmark = "NIFTY_HEALTHCARE"
+    elif "NIFTY IT" in benchmark_raw:
+        benchmark = "NIFTY_IT"
+    elif "ESG" in benchmark_raw and "100" in benchmark_raw:
+        benchmark = "NIFTY_ESG_100"
+    elif "NIFTY INDIA CONSUMPTION" in benchmark_raw:
+        benchmark = "NIFTY_INDIA_CONSUMPTION"
+    elif "NIFTY INFRASTRUCTURE" in benchmark_raw:
+        benchmark = "NIFTY_INFRASTRUCTURE"
+    elif "NIFTY 200" in benchmark_raw:
+        benchmark = "NIFTY_200"
     else:
         continue
 

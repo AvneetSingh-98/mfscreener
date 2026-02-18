@@ -2,9 +2,20 @@ import pandas as pd
 import math
 from collections import defaultdict
 
+# =========================
+# SECTIONS
+# =========================
+
 SECTION_EQUITY = "equity"
 SECTION_DEBT = "debt"
+SECTION_REITS = "reits"
 SECTION_DERIVATIVES = "derivatives"
+SECTION_CASH = "cash"
+SECTION_OTHERS = "others"
+
+# =========================
+# FILTERS
+# =========================
 
 INVALID_PREFIXES = (
     "sub total",
@@ -13,11 +24,24 @@ INVALID_PREFIXES = (
     "net current",
 )
 
+# =========================
+# HELPERS
+# =========================
+
 def is_valid_isin(val):
     if not val:
         return False
     val = str(val).strip().upper()
     return len(val) == 12 and val.isalnum()
+
+def is_reit(name, sector):
+    text = f"{name} {sector}".lower()
+    return any(x in text for x in [
+        "reit",
+        "invit",
+        "real estate investment trust",
+        "infrastructure investment trust"
+    ])
 
 def find_header_row(df):
     for i in range(len(df)):
@@ -27,6 +51,10 @@ def find_header_row(df):
         if "name of the instrument" in text and "% to net" in text:
             return i
     return None
+
+# =========================
+# MAIN PARSER
+# =========================
 
 def parse_navi_portfolio_excel(xls_path, sheet_name):
 
@@ -46,7 +74,11 @@ def parse_navi_portfolio_excel(xls_path, sheet_name):
     holdings = []
     section_summary = defaultdict(list)
 
-    current_section = SECTION_EQUITY
+    current_section = SECTION_EQUITY   # Navi sheets start with equity
+
+    # =========================
+    # ROW LOOP
+    # =========================
 
     for i in range(header_row + 1, len(df)):
         row = df.iloc[i]
@@ -55,14 +87,43 @@ def parse_navi_portfolio_excel(xls_path, sheet_name):
             str(x).lower() for x in row.values if pd.notna(x)
         )
 
-        # ---- section switches ----
+        # -----------------------
+        # SECTION SWITCHING
+        # -----------------------
+
+        if "equity & equity related" in row_text:
+            current_section = SECTION_EQUITY
+            continue
+
         if "debt" in row_text or "money market" in row_text:
             current_section = SECTION_DEBT
             continue
 
-        if "derivatives" in row_text:
+        if "treps" in row_text or "reverse repo" in row_text:
+            current_section = SECTION_CASH
+            continue
+
+        if "derivatives" in row_text or "futures" in row_text:
             current_section = SECTION_DERIVATIVES
             continue
+
+        if "mutual fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+            or "infrastructure investment trust" in row_text
+        ):
+            current_section = SECTION_REITS
+            continue
+
+        # -----------------------
+        # DATA EXTRACTION
+        # -----------------------
 
         name = row[COL_NAME]
         isin = row[COL_ISIN]
@@ -73,14 +134,13 @@ def parse_navi_portfolio_excel(xls_path, sheet_name):
             continue
 
         name = str(name).strip()
+
         if name.lower().startswith(INVALID_PREFIXES):
             continue
 
-        isin = str(isin).strip() if is_valid_isin(isin) else None
-
-        # strict ISIN only for equity
-        if current_section == SECTION_EQUITY and not isin:
-            continue
+        # -----------------------
+        # WEIGHT
+        # -----------------------
 
         try:
             weight = float(weight_raw)
@@ -90,20 +150,41 @@ def parse_navi_portfolio_excel(xls_path, sheet_name):
         if not math.isfinite(weight) or weight <= 0:
             continue
 
-        # 🔑 Navi already provides %
-        weight = round(weight, 4)
+        weight = round(weight, 4)   # Navi already gives %
+
+        # -----------------------
+        # ISIN RULE
+        # -----------------------
+
+        if current_section == SECTION_EQUITY:
+            if not is_valid_isin(isin):
+                continue
+            isin = str(isin).strip()
+        else:
+            isin = None
+
+        sector = str(sector).strip() if pd.notna(sector) else ""
+
+        # -----------------------
+        # FINAL SECTION OVERRIDE
+        # -----------------------
+
+        if is_reit(name, sector):
+            section = SECTION_REITS
+        else:
+            section = current_section
 
         holding = {
             "isin": isin,
             "company": name,
-            "sector": str(sector).strip() if pd.notna(sector) else "",
+            "sector": sector,
             "weight": weight,
             "weight_num": weight,
-            "section": current_section
+            "section": section
         }
 
         idx = len(holdings)
         holdings.append(holding)
-        section_summary[current_section].append(idx)
+        section_summary[section].append(idx)
 
     return holdings, dict(section_summary)

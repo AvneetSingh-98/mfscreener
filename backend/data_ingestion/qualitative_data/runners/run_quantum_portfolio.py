@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 
@@ -5,12 +8,16 @@ from extractors.quantum_fund_registry import QUANTUM_FUND_REGISTRY
 from extractors.quantum_index_resolver import resolve_quantum_sheet
 from extractors.quantum_portfolio_excel import parse_quantum_portfolio_excel
 
-XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-11\Quantum\Quantum_Portfolio.xlsx"
+XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-12\Quantum\Quantum_Portfolio.xlsx"
 
 AMC = "Quantum Mutual Fund"
-AS_OF = "2025-11-30"
+AS_OF = "2025-12-31"
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 col = db["portfolio_holdings_v2"]
 
@@ -19,7 +26,7 @@ for fund_key, meta in QUANTUM_FUND_REGISTRY.items():
     print("=" * 60)
     print(f"🚀 Running QUANTUM fund : {fund_key}")
 
-    sheet_name = resolve_quantum_sheet(XLS_PATH, meta["keyword"])
+    sheet_name = meta["sheet"]
     print(f"📄 Sheet resolved : {sheet_name}")
 
     holdings, section_summary = parse_quantum_portfolio_excel(

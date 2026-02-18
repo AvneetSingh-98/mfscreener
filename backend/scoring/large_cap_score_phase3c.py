@@ -2,12 +2,20 @@ import numpy as np
 import pandas as pd
 import re
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
-MANUAL_BENCHMARK_OVERRIDE = {
-    "canara robeco flexicap": "BSE_500",
-    "jm flexicap": "BSE_500",
-    "sbi flexicap": "BSE_500",
-    "kotak flexicap": "NIFTY_500",
+MANUAL_BENCHMARK_OVERRIDE = {# =========================
+    # FLEXI CAP — MANUAL OVERRIDES (FIXED)
+    # =========================
+
+    "canararobecoflexicap": "NIFTY_500",
+    "sbiflexicap": "NIFTY_500",
+    "kotakflexicap": "NIFTY_500",
+    "jmflexicap": "NIFTY_500",
+
+        
     # Mid Cap (explicit overrides)
     "adityabirlasunlifemidcap": "NIFTY_MIDCAP_150",
     "hsbcmidcap": "NIFTY_MIDCAP_150",
@@ -15,8 +23,8 @@ MANUAL_BENCHMARK_OVERRIDE = {
     "licmfmidcap": "NIFTY_MIDCAP_150",
     
     # Small Cap (explicit, verified)
-    "bandhansmallcap": "BSE_SMALLCAP_250",
-    "invescoindiasmallcap": "BSE_SMALLCAP_250",
+    "bandhansmallcap": "NIFTY_SMALLCAP_250",
+    "invescoindiasmallcap": "NIFTY_SMALLCAP_250",
     "licsmallcap": "NIFTY_SMALLCAP_250",
     
     # 🔥 Multi Cap (NEW)
@@ -27,21 +35,21 @@ MANUAL_BENCHMARK_OVERRIDE = {
     
     "aditya birla sun life value": "NIFTY_500",
     "axis value": "NIFTY_500",
-    "bandhan value": "BSE_500",
+    "bandhan value": "NIFTY_500",
     "baroda bnp paribas value": "NIFTY_500",
-    "canara robeco value": "BSE_500",
+    "canara robeco value": "NIFTY_500",
     "hdfc value": "NIFTY_500",
     "iti value": "NIFTY_500",
-    "jm value": "BSE_500",
+    "jm value": "NIFTY_500",
     "mahindra manulife value": "NIFTY_500",
     "nippon india value": "NIFTY_500",
     "quant value": "NIFTY_500",
-    "quantum value": "BSE_500",
+    "quantum value": "NIFTY_500",
     "sundaram value": "NIFTY_500",
     "tata value": "NIFTY_500",
     "templeton india value": "NIFTY_500",
     "uti value": "NIFTY_500",
-    "union value": "BSE_500",
+    "union value": "NIFTY_500",
     # Groww (formerly Indiabulls)
     "growwvalueformerlyknownasindiabullsvalue": "NIFTY_500",
 
@@ -57,8 +65,8 @@ MANUAL_BENCHMARK_OVERRIDE = {
     # ELSS — MANUAL OVERRIDES
     # =========================
 
-    "canararobecoelsstaxsaver": "BSE_500",
-    "growwelsstaxsaverformerlyknownasindiabullstaxsavings": "BSE_500",
+    "canararobecoelsstaxsaver": "NIFTY_500",
+    "growwelsstaxsaverformerlyknownasindiabullstaxsavings": "NIFTY_500",
 
     # Nippon India ELSS (Tax Saver)
     "nipponindiataxsaver": "NIFTY_500",
@@ -69,8 +77,8 @@ MANUAL_BENCHMARK_OVERRIDE = {
     # CONTRA — MANUAL OVERRIDES
     # =========================
 
-    "sbicontra": "BSE_500",
-    "invescoindia contra": "BSE_500",
+    "sbicontra": "NIFTY_500",
+    "invescoindia contra": "NIFTY_500",
     "kotak contra": "NIFTY_500",
          
 
@@ -78,36 +86,100 @@ MANUAL_BENCHMARK_OVERRIDE = {
     # FOCUSED — MANUAL OVERRIDES (CRISIL)
     # =========================
 
-    "360onefocused": "BSE_500",
+    "360onefocused": "NIFTY_500",
 
     "adityabirlasunlifefocused": "NIFTY_500",
     "axisfocused": "NIFTY_500",
-    "bandhanfocused": "BSE_500",
+    "bandhanfocused": "NIFTY_500",
     "barodabnpparibasfocused": "NIFTY_500",
-    "canararobecofocused": "BSE_500",
+    "canararobecofocused": "NIFTY_500",
     "dspfocused": "NIFTY_500",
     "edelweissfocused": "NIFTY_500",
     "franklinindiafocusedequity": "NIFTY_500",
     "hdfcfocused": "NIFTY_500",
     "hsbcfocused": "NIFTY_500",
 
-    "iciciprudentialfocusedequity": "BSE_500",
+    "iciciprudentialfocusedequity": "NIFTY_500",
     "itifocused": "NIFTY_500",
-    "invescoindiafocused": "BSE_500",
-    "jmfocused": "BSE_500",
+    "invescoindiafocused": "NIFTY_500",
+    "jmfocused": "NIFTY_500",
     "kotakfocused": "NIFTY_500",
     "mahindramanulifefocused": "NIFTY_500",
     "miraeassetfocused": "NIFTY_500",
-    "nipponindiafocused": "BSE_500",
-    "oldbridgefocused": "BSE_500",
+    "nipponindiafocused": "NIFTY_500",
+    "oldbridgefocused": "NIFTY_500",
     "quantfocused": "NIFTY_500",
-    "sbifocused": "BSE_500",
+    "sbifocused": "NIFTY_500",
     "sundaramfocused": "NIFTY_500",
     "tatafocused": "NIFTY_500",
     "utifocused": "NIFTY_500",
-    "unionfocused": "BSE_500",
+    "unionfocused": "NIFTY_500",
     "licfocused": "NIFTY_500",
-    "motilaloswalfocused25mof25": "NIFTY_500"
+    "motilaloswalfocused25mof25": "NIFTY_500",
+    # =========================
+# LARGE & MID CAP — MANUAL OVERRIDES
+# =========================
+
+"edelweisslargemidcap": "NIFTY_LARGEMIDCAP_250",
+"hsbclargemidcap": "NIFTY_LARGEMIDCAP_250",
+"quantlargemidcap": "NIFTY_LARGEMIDCAP_250",
+"sundaramlargeandmidcap": "NIFTY_LARGEMIDCAP_250",
+"unionlargemidcap": "NIFTY_LARGEMIDCAP_250",
+"barodabnpparibaslargeandmidcap": "NIFTY_LARGEMIDCAP_250",
+# =========================
+# LARGE CAP — MANUAL OVERRIDES (FIXED)
+# =========================
+
+"growwlargecapformerlyknownasindiabullsbluechip": "NIFTY_100",
+"iciciprudentiallargecapbluechip": "NIFTY_100",
+"sundaramlargecapformerlyknownassundarambluechip": "NIFTY_100",
+# =========================
+# BANKING & FINANCIAL SERVICES
+# =========================
+"adityabirlasunlifebankingandfinancialservices": "NIFTY_FINANCIAL_SERVICES",
+"nipponindiabankingandfinancialservices": "NIFTY_FINANCIAL_SERVICES",
+"hdfcbankingfinancialservices": "NIFTY_FINANCIAL_SERVICES",
+"licbankingandfinancialservices": "NIFTY_FINANCIAL_SERVICES",
+"taurusbankingfinancialservices": "NIFTY_FINANCIAL_SERVICES",
+# =========================
+# HEALTHCARE / PHARMA
+# =========================
+"adityabirlasunlifepharmaandhealthcare": "NIFTY_HEALTHCARE",
+"itipharmaandhealthcare": "NIFTY_HEALTHCARE",
+"nipponindiapharma": "NIFTY_HEALTHCARE",
+"quanthealthcare": "NIFTY_HEALTHCARE",
+"sbihealthcareopportunities": "NIFTY_HEALTHCARE",
+"tataindiapharmahealthcare": "NIFTY_HEALTHCARE",
+"utihealthcare": "NIFTY_HEALTHCARE",
+"whiteoakcapitalpharmaandheathcare": "NIFTY_HEALTHCARE",
+# =========================
+# CONSUMPTION
+# =========================
+"nipponindiaconsumption": "NIFTY_INDIA_CONSUMPTION",
+"sundaramconsumptionformerlyknownassundaramruralandconsumption": "NIFTY_INDIA_CONSUMPTION",
+# =========================
+# INFRASTRUCTURE
+# =========================
+"bandhaninfrastructure": "NIFTY_INFRASTRUCTURE",
+"bankofindiamanufacturinginfrastructure": "NIFTY_INFRASTRUCTURE",
+"canararobecoinfrastructure": "NIFTY_INFRASTRUCTURE",
+"kotakinfrastructureeconomicreform": "NIFTY_INFRASTRUCTURE",
+"nipponindiapowerinfra": "NIFTY_INFRASTRUCTURE",
+
+# =========================
+# QUANT / MULTI-FACTOR
+# =========================
+"nipponindiaquant": "NIFTY_200",
+"tataquant": "NIFTY_200",
+# =========================
+# UNKNOWN FIX OVERRIDES
+# =========================
+
+"mahindramanulifebusinesscycle": "NIFTY_500",
+"hsbcconsumption": "NIFTY_INDIA_CONSUMPTION",
+"hdfctechnology": "NIFTY_IT",
+"quantteck": "NIFTY_IT"
+
 }
 
 # =========================
@@ -133,13 +205,32 @@ SCORE_COLLECTIONS = [
     "score_value_cap",
     "score_elss_cap",
     "score_contra_cap",
-    "score_focused_cap"
+    "score_focused_cap",
+    "score_large_mid_cap",
+    # THEMATIC / SECTORAL
+    # =========================
+    "score_banking_financial_services",
+    "score_healthcare",
+    "score_infrastructure",
+    "score_consumption",
+    "score_business_cycle",
+    "score_esg",
+    "score_technology",
+
+    # =========================
+    # FACTOR
+    # =========================
+    "score_quant_multifactor"
 ]
 
 # =========================
 # DB CONNECTION
 # =========================
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 
 nav_col       = db["nav_history"]
@@ -186,7 +277,8 @@ def fetch_monthly_nav(collection, key, value):
     return df.groupby("month").last().reset_index()
 
 def log_returns(df):
-    df["ret"] = np.log(df["nav"] / df["nav"].shift(1))
+    """Switching to simple returns for industry standard alignment"""
+    df["ret"] = df["nav"].pct_change()
     return df.dropna()
 
 # =========================
@@ -197,15 +289,62 @@ def sharpe(r):
     return None if s == 0 else ((r.mean() - RF_MONTHLY) / s) * np.sqrt(12)
 
 def sortino(r):
-    d = r[r < RF_MONTHLY]
-    if d.empty:
-        return None
-    ds = np.sqrt(((d - RF_MONTHLY) ** 2).mean())
-    return None if ds == 0 else ((r.mean() - RF_MONTHLY) / ds) * np.sqrt(12)
+    # 1. Calculate the 'Underperformance' for every month
+    # If return > RF, underperformance is 0. If return < RF, it's the difference.
+    diffs = r - RF_MONTHLY
+    downside_sq = np.minimum(0, diffs)**2
+    
+    # 2. Average across ALL months (N=36), not just the bad ones
+    ds = np.sqrt(downside_sq.mean())
+    
+    excess_return = r.mean() - RF_MONTHLY
+    
+    if ds == 0:
+        return 99.0 if excess_return > 0 else 0.0
+        
+    # 3. Annualize the result
+    return (excess_return / ds) * np.sqrt(12)
 
 def beta(rs, rb):
     vb = np.var(rb)
     return None if vb == 0 else np.cov(rs, rb)[0][1] / vb
+def upside_beta(rs, rb, min_points=6):
+    """
+    Sensitivity during positive benchmark months
+    Higher is better
+    """
+    mask = rb > 0
+    if mask.sum() < min_points:
+        return None
+
+    rs_up = rs[mask]
+    rb_up = rb[mask]
+
+    vb = np.var(rb_up)
+    if vb == 0:
+        return None
+
+    return np.cov(rs_up, rb_up)[0][1] / vb
+
+
+def downside_beta(rs, rb, min_points=6):
+    """
+    Sensitivity during negative benchmark months
+    Lower is better
+    """
+    mask = rb < 0
+    if mask.sum() < min_points:
+        return None
+
+    rs_down = rs[mask]
+    rb_down = rb[mask]
+
+    vb = np.var(rb_down)
+    if vb == 0:
+        return None
+
+    return np.cov(rs_down, rb_down)[0][1] / vb
+
 
 def information_ratio(rs, rb):
     a = rs - rb
@@ -299,7 +438,11 @@ def run_phase_3c():
                 "information_ratio_3y": information_ratio(
                     merged["ret_s"], merged["ret_b"]),
                 "beta_3y": beta(
-                    merged["ret_s"], merged["ret_b"])
+                    merged["ret_s"], merged["ret_b"]),
+                "upside_beta_3y": upside_beta(
+                    merged["ret_s"], merged["ret_b"] ),
+                "downside_beta_3y": downside_beta(
+                    merged["ret_s"], merged["ret_b"]),
             }
 
             score_col.update_one(
@@ -316,12 +459,12 @@ def run_phase_3c():
 
             updated += 1
 
-        print(f"✅ Phase-3C complete — {col_name}")
+        print(f"Phase-3C complete  - {col_name}")
         print("Updated:", updated, "Skipped:", skipped)
 
         total_updated += updated
 
-    print("\n📊 TOTAL UPDATED:", total_updated)
+    print("\n TOTAL UPDATED:", total_updated)
 
 # =========================
 # ENTRY

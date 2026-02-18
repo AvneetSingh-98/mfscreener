@@ -10,6 +10,7 @@ SECTION_DEBT = "debt"
 SECTION_REITS = "reits"
 SECTION_DERIVATIVES = "derivatives"
 SECTION_CASH = "cash"
+SECTION_OTHERS = "others"
 
 INVALID_PREFIXES = (
     "sub total",
@@ -18,6 +19,7 @@ INVALID_PREFIXES = (
     "portfolio total",
     "net receivables",
     "net payables",
+    "COMMODITIES & COMMODITIES RELATED TOTAL"
 )
 
 # =========================
@@ -74,26 +76,57 @@ def parse_tata_portfolio_excel(xls_path, sheet_name):
         if header_row is None:
             continue
 
-        # -------- SECTION SWITCHING --------
+         # SECTION SWITCHING
+        # =================================================
+        # =================================================
+
         if "equity & equity related" in row_text:
-            current_section = SECTION_EQUITY
-            continue
+           current_section = SECTION_EQUITY
+           continue
+        # ETFs -> Others
+        if "exchange traded funds" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "etf" in row_text:
+          current_section = SECTION_OTHERS
+
+        if "commodities" in row_text:
+           current_section = SECTION_OTHERS
+
+        if "mutual fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "alternative investment fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
 
         if "debt instruments" in row_text or "money market instruments" in row_text:
-            current_section = SECTION_DEBT
-            continue
+           current_section = SECTION_DEBT
+           continue
+        
 
         if "treps" in row_text or "reverse repo" in row_text:
-            current_section = SECTION_CASH
-            continue
+           current_section = SECTION_CASH
+           continue
 
-        if "derivative" in row_text or "future" in row_text:
-            current_section = SECTION_DERIVATIVES
-            continue
+        if "margin (future" in row_text or "derivatives" in row_text:
+           current_section = SECTION_DERIVATIVES
+           continue
 
-        if "reit" in row_text or "invit" in row_text:
-            current_section = SECTION_REITS
-            continue
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+            or "infrastructure investment trust" in row_text
+        ):
+         current_section = SECTION_REITS
+         continue
+
+        if current_section is None:
+          current_section = SECTION_OTHERS
 
         # -------- DATA ROW --------
         try:
@@ -125,15 +158,13 @@ def parse_tata_portfolio_excel(xls_path, sheet_name):
         except:
             continue
 
-        if not math.isfinite(weight) or weight <= 0:
+        if not math.isfinite(weight):
             continue
 
         # Tata provides FRACTION → convert
         # Tata sheets already have % values
-        # Reject derivatives / garbage weights
-        if weight <= 0 or weight > 100:
-         continue
-
+       
+        
 
 
 

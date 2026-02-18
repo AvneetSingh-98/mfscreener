@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 
 # =========================
@@ -51,12 +54,22 @@ CATEGORIES = {
         "score_col": "score_focused_cap",
         "cons_col": "score_focused_cap_consistency",
         "rank_field": "focused_cap"
-    }
+    },
+    "Large & Mid Cap": {
+    "score_col": "score_large_mid_cap",
+    "cons_col": "score_large_mid_cap_consistency",
+    "rank_field": "large_mid_cap"
+}
+
 }
 # =========================
 # DB CONNECTION
 # =========================
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 
 # =========================

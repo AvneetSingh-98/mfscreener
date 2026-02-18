@@ -15,6 +15,7 @@ SECTION_EQUITY_FOREIGN = "equity_foreign"
 SECTION_DEBT = "debt"
 SECTION_REITS = "reits"
 SECTION_DERIVATIVES = "derivatives"
+SECTION_OTHERS = "others"
 
 INVALID_NAME_PREFIXES = (
     "sub total",
@@ -47,7 +48,8 @@ def is_reit_holding(name: str, sector: str) -> bool:
         "invit",
         "real estate trust",
         "business parks",
-        "office parks"
+        "office parks",
+        "REIT",
     ])
 
 # -------------------------
@@ -78,10 +80,24 @@ def parse_ppfas_portfolio_excel(xls_path, sheet_name):
         if "equity & equity related" in row_text:
             current_section = SECTION_EQUITY
             continue
+        # ETFs -> Others
+        if "exchange traded funds" in row_text:
+          current_section = SECTION_OTHERS
+          continue
 
-        if "reit" in row_text or "invit" in row_text:
-            current_section = SECTION_REITS
-            continue
+        if "etf" in row_text:
+          current_section = SECTION_OTHERS
+
+
+        if "mutual fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "alternative investment fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        
 
         if any(x in row_text for x in [
             "money market",

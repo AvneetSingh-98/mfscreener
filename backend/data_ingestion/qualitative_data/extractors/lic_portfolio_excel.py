@@ -6,6 +6,8 @@ SECTION_EQUITY = "equity"
 SECTION_DEBT = "debt"
 SECTION_CASH = "cash"
 SECTION_REITS = "reits"
+SECTION_OTHERS = "others"
+SECTION_DERIVATIVES = "derivatives"
 
 INVALID_PREFIXES = (
     "sub total",
@@ -23,7 +25,9 @@ def is_valid_isin(isin):
     isin = str(isin).strip().upper()
     return isin.startswith("INE") and len(isin) == 12
 
+
 def parse_lic_portfolio_excel(xls_path, sheet_name):
+
     df = pd.read_excel(xls_path, sheet_name=sheet_name, header=None)
 
     holdings = []
@@ -59,21 +63,55 @@ def parse_lic_portfolio_excel(xls_path, sheet_name):
         if not col_map:
             continue
 
-        # ---------------- SECTION SWITCH ----------------
+        # ========== SECTION SWITCHING ==========
+
         if "equity & equity related" in row_text:
             current_section = SECTION_EQUITY
             continue
-        if "debt instruments" in row_text or "money market" in row_text:
+
+        if "exchange traded funds" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "etf" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        # ✅ FIX ADDED
+        if "investment in mutual fund" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "mutual fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "alternative investment fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "debt instruments" in row_text or "money market instruments" in row_text:
             current_section = SECTION_DEBT
             continue
+
         if "treps" in row_text or "reverse repo" in row_text:
             current_section = SECTION_CASH
             continue
-        if "reit" in row_text or "invit" in row_text:
+
+        if "margin (future" in row_text or "derivatives" in row_text:
+            current_section = SECTION_DERIVATIVES
+            continue
+
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+            or "infrastructure investment trust" in row_text
+        ):
             current_section = SECTION_REITS
             continue
 
-        # 🔥 DEFAULT TO EQUITY (ICICI RULE)
         if current_section is None:
             current_section = SECTION_EQUITY
 
@@ -90,6 +128,7 @@ def parse_lic_portfolio_excel(xls_path, sheet_name):
             continue
 
         name = str(name).strip()
+
         if normalize(name).startswith(INVALID_PREFIXES):
             continue
 
@@ -98,7 +137,7 @@ def parse_lic_portfolio_excel(xls_path, sheet_name):
                 continue
 
         try:
-            weight = float(weight)*100
+            weight = float(weight) * 100
         except:
             continue
 

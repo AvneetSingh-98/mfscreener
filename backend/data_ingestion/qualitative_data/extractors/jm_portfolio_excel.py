@@ -7,6 +7,7 @@ SECTION_DEBT = "debt"
 SECTION_CASH = "cash"
 SECTION_REITS = "reits"
 SECTION_DERIVATIVES = "derivatives"
+SECTION_OTHERS = "others"
 
 INVALID_PREFIXES = (
     "sub total",
@@ -59,21 +60,52 @@ def parse_jm_portfolio_excel(xls_path, sheet_name):
 
         if not col_map:
             continue
-
-        # ---------- SECTION SWITCH ----------
+        ## SECTION SWITCHING
         if "equity & equity related" in row_text:
-            current_section = SECTION_EQUITY
-            continue
-        if "debt instruments" in row_text or "money market" in row_text:
-            current_section = SECTION_DEBT
-            continue
-        if "treps" in row_text or "reverse repo" in row_text:
-            current_section = SECTION_CASH
-            continue
+           current_section = SECTION_EQUITY
+           continue
+        # ETFs -> Others
+        if "exchange traded funds" in row_text:
+          current_section = SECTION_OTHERS
+          continue
 
-        # ---------- DEFAULT SECTION (🔥 FIX) ----------
+        if "etf" in row_text:
+          current_section = SECTION_OTHERS
+
+
+        if "mutual fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "alternative investment fund units" in row_text:
+          current_section = SECTION_OTHERS
+          continue
+
+        if "debt instruments" in row_text or "money market instruments" in row_text:
+           current_section = SECTION_DEBT
+           continue
+        
+
+        if "treps" in row_text or "reverse repo" in row_text:
+           current_section = SECTION_CASH
+           continue
+
+        if "margin (future" in row_text or "derivatives" in row_text:
+           current_section = SECTION_DERIVATIVES
+           continue
+
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+            or "infrastructure investment trust" in row_text
+        ):
+         current_section = SECTION_REITS
+         continue
+
         if current_section is None:
-            current_section = SECTION_EQUITY
+          current_section = SECTION_OTHERS
 
         # ---------- DATA ----------
         try:

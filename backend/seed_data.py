@@ -1,11 +1,16 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from datetime import datetime, timedelta
 from pymongo import MongoClient
 import random
 
-MONGO_URL = "mongodb://localhost:27017"
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = "mfscreener"
 
-client = MongoClient(MONGO_URL)
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client[DB_NAME]
 
 funds_col = db.funds

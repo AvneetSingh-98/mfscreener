@@ -1,0 +1,271 @@
+category,metric,coverage_pct
+Contra,aum,100.0
+Contra,cagr_1y,100.0
+Contra,cagr_3y,100.0
+Contra,cagr_5y,100.0
+Contra,down_beta,100.0
+Contra,iqr_3y,100.0
+Contra,iqr_5y,100.0
+Contra,ir,100.0
+Contra,manager_experience,100.0
+Contra,max_dd,100.0
+Contra,pb,100.0
+Contra,pe,100.0
+Contra,return_3m,100.0
+Contra,return_6m,100.0
+Contra,roe,100.0
+Contra,rolling_3y,100.0
+Contra,rolling_5y,100.0
+Contra,sector_hhi,100.0
+Contra,sharpe,100.0
+Contra,sortino,100.0
+Contra,stock_count,100.0
+Contra,ter,100.0
+Contra,top10,66.66666666666666
+Contra,top3_sector,100.0
+Contra,turnover,100.0
+Contra,up_beta,100.0
+Contra,volatility,100.0
+ELSS,aum,100.0
+ELSS,cagr_1y,100.0
+ELSS,cagr_3y,100.0
+ELSS,cagr_5y,87.5
+ELSS,down_beta,100.0
+ELSS,iqr_3y,87.5
+ELSS,iqr_5y,87.5
+ELSS,ir,100.0
+ELSS,manager_experience,100.0
+ELSS,max_dd,100.0
+ELSS,pb,93.75
+ELSS,pe,93.75
+ELSS,return_3m,100.0
+ELSS,return_6m,100.0
+ELSS,roe,93.75
+ELSS,rolling_3y,87.5
+ELSS,rolling_5y,87.5
+ELSS,sector_hhi,96.875
+ELSS,sharpe,100.0
+ELSS,sortino,100.0
+ELSS,stock_count,100.0
+ELSS,ter,100.0
+ELSS,top10,96.875
+ELSS,top3_sector,100.0
+ELSS,turnover,100.0
+ELSS,up_beta,100.0
+ELSS,volatility,100.0
+Flexi Cap,aum,100.0
+Flexi Cap,cagr_1y,97.22222222222221
+Flexi Cap,cagr_3y,83.33333333333334
+Flexi Cap,cagr_5y,61.111111111111114
+Flexi Cap,down_beta,86.11111111111111
+Flexi Cap,iqr_3y,61.111111111111114
+Flexi Cap,iqr_5y,61.111111111111114
+Flexi Cap,ir,86.11111111111111
+Flexi Cap,manager_experience,94.44444444444444
+Flexi Cap,max_dd,97.22222222222221
+Flexi Cap,pb,94.44444444444444
+Flexi Cap,pe,94.44444444444444
+Flexi Cap,return_3m,97.22222222222221
+Flexi Cap,return_6m,97.22222222222221
+Flexi Cap,roe,94.44444444444444
+Flexi Cap,rolling_3y,61.111111111111114
+Flexi Cap,rolling_5y,61.111111111111114
+Flexi Cap,sector_hhi,97.22222222222221
+Flexi Cap,sharpe,86.11111111111111
+Flexi Cap,sortino,86.11111111111111
+Flexi Cap,stock_count,100.0
+Flexi Cap,ter,100.0
+Flexi Cap,top10,97.22222222222221
+Flexi Cap,top3_sector,100.0
+Flexi Cap,turnover,100.0
+Flexi Cap,up_beta,86.11111111111111
+Flexi Cap,volatility,97.22222222222221
+Focused,aum,100.0
+Focused,cagr_1y,100.0
+Focused,cagr_3y,92.85714285714286
+Focused,cagr_5y,75.0
+Focused,down_beta,89.28571428571429
+Focused,iqr_3y,78.57142857142857
+Focused,iqr_5y,75.0
+Focused,ir,89.28571428571429
+Focused,manager_experience,96.42857142857143
+Focused,max_dd,100.0
+Focused,pb,92.85714285714286
+Focused,pe,92.85714285714286
+Focused,return_3m,100.0
+Focused,return_6m,100.0
+Focused,roe,92.85714285714286
+Focused,rolling_3y,78.57142857142857
+Focused,rolling_5y,75.0
+Focused,sector_hhi,96.42857142857143
+Focused,sharpe,89.28571428571429
+Focused,sortino,89.28571428571429
+Focused,stock_count,100.0
+Focused,ter,100.0
+Focused,top10,92.85714285714286
+Focused,top3_sector,100.0
+Focused,turnover,100.0
+Focused,up_beta,89.28571428571429
+Focused,volatility,100.0
+Large & Mid Cap,aum,100.0
+Large & Mid Cap,cagr_1y,93.33333333333333
+Large & Mid Cap,cagr_3y,80.0
+Large & Mid Cap,cagr_5y,80.0
+Large & Mid Cap,down_beta,80.0
+Large & Mid Cap,iqr_3y,80.0
+Large & Mid Cap,iqr_5y,80.0
+Large & Mid Cap,ir,80.0
+Large & Mid Cap,manager_experience,100.0
+Large & Mid Cap,max_dd,93.33333333333333
+Large & Mid Cap,pb,93.33333333333333
+Large & Mid Cap,pe,93.33333333333333
+Large & Mid Cap,return_3m,93.33333333333333
+Large & Mid Cap,return_6m,93.33333333333333
+Large & Mid Cap,roe,93.33333333333333
+Large & Mid Cap,rolling_3y,80.0
+Large & Mid Cap,rolling_5y,80.0
+Large & Mid Cap,sector_hhi,96.66666666666667
+Large & Mid Cap,sharpe,80.0
+Large & Mid Cap,sortino,80.0
+Large & Mid Cap,stock_count,100.0
+Large & Mid Cap,ter,100.0
+Large & Mid Cap,top10,96.66666666666667
+Large & Mid Cap,top3_sector,100.0
+Large & Mid Cap,turnover,100.0
+Large & Mid Cap,up_beta,80.0
+Large & Mid Cap,volatility,93.33333333333333
+Large Cap,aum,100.0
+Large Cap,cagr_1y,96.7741935483871
+Large Cap,cagr_3y,90.32258064516128
+Large Cap,cagr_5y,77.41935483870968
+Large Cap,down_beta,90.32258064516128
+Large Cap,iqr_3y,77.41935483870968
+Large Cap,iqr_5y,77.41935483870968
+Large Cap,ir,90.32258064516128
+Large Cap,manager_experience,100.0
+Large Cap,max_dd,96.7741935483871
+Large Cap,pb,93.54838709677419
+Large Cap,pe,93.54838709677419
+Large Cap,return_3m,96.7741935483871
+Large Cap,return_6m,96.7741935483871
+Large Cap,roe,93.54838709677419
+Large Cap,rolling_3y,77.41935483870968
+Large Cap,rolling_5y,77.41935483870968
+Large Cap,sector_hhi,96.7741935483871
+Large Cap,sharpe,90.32258064516128
+Large Cap,sortino,90.32258064516128
+Large Cap,stock_count,100.0
+Large Cap,ter,100.0
+Large Cap,top10,96.7741935483871
+Large Cap,top3_sector,100.0
+Large Cap,turnover,100.0
+Large Cap,up_beta,90.32258064516128
+Large Cap,volatility,96.7741935483871
+Mid Cap,aum,100.0
+Mid Cap,cagr_1y,96.55172413793103
+Mid Cap,cagr_3y,93.10344827586206
+Mid Cap,cagr_5y,72.41379310344827
+Mid Cap,down_beta,96.55172413793103
+Mid Cap,iqr_3y,75.86206896551724
+Mid Cap,iqr_5y,72.41379310344827
+Mid Cap,ir,96.55172413793103
+Mid Cap,manager_experience,100.0
+Mid Cap,max_dd,96.55172413793103
+Mid Cap,pb,93.10344827586206
+Mid Cap,pe,93.10344827586206
+Mid Cap,return_3m,96.55172413793103
+Mid Cap,return_6m,96.55172413793103
+Mid Cap,roe,93.10344827586206
+Mid Cap,rolling_3y,75.86206896551724
+Mid Cap,rolling_5y,72.41379310344827
+Mid Cap,sector_hhi,96.55172413793103
+Mid Cap,sharpe,96.55172413793103
+Mid Cap,sortino,96.55172413793103
+Mid Cap,stock_count,100.0
+Mid Cap,ter,100.0
+Mid Cap,top10,96.55172413793103
+Mid Cap,top3_sector,100.0
+Mid Cap,turnover,100.0
+Mid Cap,up_beta,96.55172413793103
+Mid Cap,volatility,96.55172413793103
+Multi Cap,aum,100.0
+Multi Cap,cagr_1y,92.0
+Multi Cap,cagr_3y,56.00000000000001
+Multi Cap,cagr_5y,24.0
+Multi Cap,down_beta,48.0
+Multi Cap,iqr_3y,28.000000000000004
+Multi Cap,iqr_5y,24.0
+Multi Cap,ir,48.0
+Multi Cap,manager_experience,96.0
+Multi Cap,max_dd,92.0
+Multi Cap,pb,96.0
+Multi Cap,pe,96.0
+Multi Cap,return_3m,92.0
+Multi Cap,return_6m,92.0
+Multi Cap,roe,96.0
+Multi Cap,rolling_3y,28.000000000000004
+Multi Cap,rolling_5y,24.0
+Multi Cap,sector_hhi,96.0
+Multi Cap,sharpe,48.0
+Multi Cap,sortino,48.0
+Multi Cap,stock_count,100.0
+Multi Cap,ter,100.0
+Multi Cap,top10,96.0
+Multi Cap,top3_sector,100.0
+Multi Cap,turnover,100.0
+Multi Cap,up_beta,48.0
+Multi Cap,volatility,92.0
+Small Cap,aum,100.0
+Small Cap,cagr_1y,100.0
+Small Cap,cagr_3y,79.3103448275862
+Small Cap,cagr_5y,72.41379310344827
+Small Cap,down_beta,75.86206896551724
+Small Cap,iqr_3y,72.41379310344827
+Small Cap,iqr_5y,72.41379310344827
+Small Cap,ir,75.86206896551724
+Small Cap,manager_experience,100.0
+Small Cap,max_dd,100.0
+Small Cap,pb,93.10344827586206
+Small Cap,pe,93.10344827586206
+Small Cap,return_3m,100.0
+Small Cap,return_6m,100.0
+Small Cap,roe,93.10344827586206
+Small Cap,rolling_3y,72.41379310344827
+Small Cap,rolling_5y,72.41379310344827
+Small Cap,sector_hhi,96.55172413793103
+Small Cap,sharpe,75.86206896551724
+Small Cap,sortino,75.86206896551724
+Small Cap,stock_count,100.0
+Small Cap,ter,100.0
+Small Cap,top10,96.55172413793103
+Small Cap,top3_sector,100.0
+Small Cap,turnover,100.0
+Small Cap,up_beta,75.86206896551724
+Small Cap,volatility,100.0
+Value,aum,100.0
+Value,cagr_1y,95.0
+Value,cagr_3y,85.0
+Value,cagr_5y,70.0
+Value,down_beta,90.0
+Value,iqr_3y,75.0
+Value,iqr_5y,70.0
+Value,ir,90.0
+Value,manager_experience,100.0
+Value,max_dd,95.0
+Value,pb,90.0
+Value,pe,90.0
+Value,return_3m,95.0
+Value,return_6m,95.0
+Value,roe,90.0
+Value,rolling_3y,75.0
+Value,rolling_5y,70.0
+Value,sector_hhi,95.0
+Value,sharpe,90.0
+Value,sortino,90.0
+Value,stock_count,100.0
+Value,ter,100.0
+Value,top10,100.0
+Value,top3_sector,100.0
+Value,turnover,100.0
+Value,up_beta,90.0
+Value,volatility,95.0

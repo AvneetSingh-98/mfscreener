@@ -3,11 +3,15 @@ import re
 from datetime import datetime
 from pymongo import MongoClient
 from fetch_nav import fetch_amfi_nav
+from dotenv import load_dotenv
+import certifi
 
-MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
-DB_NAME = os.environ.get("DB_NAME", "mfscreener")
+load_dotenv()
 
-client = MongoClient(MONGO_URL)
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME", "mfscreener")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client[DB_NAME]
 
 

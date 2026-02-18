@@ -3,16 +3,20 @@ import requests
 from datetime import datetime
 from pymongo import MongoClient, ASCENDING
 import os
+from dotenv import load_dotenv
+import certifi
+
+load_dotenv()
 
 # ---------- CONFIG ----------
-MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
-DB_NAME = os.environ.get("DB_NAME", "mfscreener")
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME", "mfscreener")
 
 MFAPI_URL = "https://api.mfapi.in/mf/{}"
 RATE_LIMIT_SECONDS = 0.3
 
 # ---------- DB ----------
-client = MongoClient(MONGO_URL)
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client[DB_NAME]
 
 funds_col = db.fund_master
@@ -83,16 +87,8 @@ def backfill_nav_for_category(category):
     print(f"Failed: {failed}")
 
 EQUITY_CATEGORIES = [
-    "Large Cap",
-    "Flexi Cap",
-    "Large & Mid Cap",
-    "Mid Cap",
-    "Small Cap",
-    "Multi Cap",
-    "Value",
-    "Focused",
-    "ELSS",
-    "Contra"
+   
+    "Sectoral/ Thematic"
 ]
 
 if __name__ == "__main__":

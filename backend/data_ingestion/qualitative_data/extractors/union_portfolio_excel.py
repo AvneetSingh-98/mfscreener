@@ -2,18 +2,32 @@ import pandas as pd
 import math
 from collections import defaultdict
 
+# =========================
+# SECTIONS
+# =========================
+
 SECTION_EQUITY = "equity"
 SECTION_DEBT = "debt"
 SECTION_REITS = "reits"
 SECTION_DERIVATIVES = "derivatives"
+SECTION_CASH = "cash"
+SECTION_OTHERS = "others"
 
 INVALID_PREFIXES = (
     "sub total",
+    "subtotal",
     "total",
     "grand total",
     "net current",
     "portfolio classification",
 )
+
+# =========================
+# HELPERS
+# =========================
+
+def normalize(x):
+    return str(x).lower().strip()
 
 def is_valid_isin(text):
     if not text:
@@ -36,18 +50,32 @@ def find_isin_anywhere(row):
 
 def is_reit(name, sector):
     text = f"{name} {sector}".lower()
-    return any(x in text for x in ["reit", "invit"])
+    return any(x in text for x in [
+        "reit",
+        "invit",
+        "real estate investment trust"
+    ])
+
+# =========================
+# HEADER DETECTION
+# =========================
 
 def find_header_row(df):
     for i in range(len(df)):
-        text = " ".join(str(x).lower() for x in df.iloc[i].values if pd.notna(x))
+        text = " ".join(
+            normalize(x) for x in df.iloc[i].values if pd.notna(x)
+        )
         if "name of the instrument" in text and "% to nav" in text:
             return i
     return None
 
+# =========================
+# PERCENT COLUMN DETECTION
+# =========================
+
 def detect_percent_column(df, qty_col_idx, start_row):
     best_col = None
-    best_score = 0
+    best_score = 0.0
 
     for col_idx in range(qty_col_idx + 1, min(qty_col_idx + 6, df.shape[1])):
         series = pd.to_numeric(
@@ -58,7 +86,7 @@ def detect_percent_column(df, qty_col_idx, start_row):
         if len(series) < 10:
             continue
 
-        score = ((series > 0) & (series <= 1)).mean()
+        score = ((series > 0) & (series <= 100)).mean()
         if score > best_score:
             best_score = score
             best_col = col_idx
@@ -67,6 +95,10 @@ def detect_percent_column(df, qty_col_idx, start_row):
         raise Exception("❌ Could not detect % to NAV column")
 
     return best_col
+
+# =========================
+# MAIN PARSER
+# =========================
 
 def parse_union_portfolio_excel(xls_path, sheet_name):
 
@@ -81,30 +113,67 @@ def parse_union_portfolio_excel(xls_path, sheet_name):
     COL_NAME   = header[header.str.contains("name", case=False)].index[0]
     COL_SECTOR = header[header.str.contains("industry", case=False)].index[0]
     COL_QTY    = header[header.str.contains("quantity", case=False)].index[0]
+
     COL_WEIGHT = detect_percent_column(df, COL_QTY, header_row + 1)
 
     holdings = []
     section_summary = defaultdict(list)
+
     current_section = SECTION_EQUITY
+
+    # =========================
+    # ROW LOOP
+    # =========================
 
     for i in range(header_row + 1, len(df)):
         row = df.iloc[i]
-        row_text = " ".join(str(x).lower() for x in row.values if pd.notna(x))
 
-        if any(x in row_text for x in [
-            "debt instruments",
-            "money market",
-            "treasury bills",
-            "reverse repo",
-            "treps"
-        ]):
+        row_text = " ".join(
+            normalize(x) for x in row.values if pd.notna(x)
+        )
+
+        # ---------- SECTION SWITCH (same as Canara) ----------
+        if "equity & equity related" in row_text:
+            current_section = SECTION_EQUITY
+            continue
+
+        if "exchange traded funds" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "mutual fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "alternative investment fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "debt instruments" in row_text or "money market instruments" in row_text:
             current_section = SECTION_DEBT
             continue
 
-        if "derivatives" in row_text:
+        if "treps" in row_text or "reverse repo" in row_text:
+            current_section = SECTION_CASH
+            continue
+
+        if "derivative" in row_text or "margin (future" in row_text:
             current_section = SECTION_DERIVATIVES
             continue
 
+        if (
+            row_text.startswith("reit")
+            or row_text.startswith("reits")
+            or row_text.startswith("invit")
+            or "real estate investment trust" in row_text
+        ):
+            current_section = SECTION_REITS
+            continue
+
+        if current_section is None:
+            current_section = SECTION_OTHERS
+
+        # ---------- DATA ----------
         raw_name = row[COL_NAME]
         sector = row[COL_SECTOR]
         weight_raw = row[COL_WEIGHT]
@@ -113,28 +182,32 @@ def parse_union_portfolio_excel(xls_path, sheet_name):
             continue
 
         raw_name = str(raw_name).strip()
-        if raw_name.lower().startswith(INVALID_PREFIXES):
+        lname = normalize(raw_name)
+        if any(x in lname for x in INVALID_PREFIXES):
             continue
 
         name, isin = extract_name_isin(raw_name)
+
         if not isin:
             isin = find_isin_anywhere(row)
 
         if current_section == SECTION_EQUITY and not isin:
             continue
 
+        sector = str(sector).strip() if pd.notna(sector) else ""
+
         try:
-            weight = float(weight_raw)
+            weight = float(str(weight_raw).replace("%", "").strip())
         except:
             continue
 
-         # Union provides % directly
-        if weight <= 0 or weight > 100:
-          continue
+        # Union gives % already
+        if not math.isfinite(weight) or not (0 < weight <= 100):
+            continue
 
         weight = round(weight, 4)
 
-
+        # ---------- FINAL SECTION ----------
         if current_section == SECTION_DERIVATIVES:
             section = SECTION_DERIVATIVES
             isin = None
@@ -146,7 +219,7 @@ def parse_union_portfolio_excel(xls_path, sheet_name):
         holding = {
             "isin": isin,
             "company": name,
-            "sector": str(sector).strip(),
+            "sector": sector,
             "weight": weight,
             "weight_num": weight,
             "section": section

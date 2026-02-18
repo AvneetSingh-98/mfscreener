@@ -1,103 +1,160 @@
 import pandas as pd
-import re
 import math
+from collections import defaultdict
 
-ISIN_REGEX = re.compile(r"^INE[A-Z0-9]{9}$")
+# ----------------------------
+# Sections
+# ----------------------------
+SECTION_EQUITY = "equity"
+SECTION_DEBT = "debt"
+SECTION_REITS = "reits"
+SECTION_DERIVATIVES = "derivatives"
+SECTION_CASH = "cash"
+SECTION_OTHERS = "others"
+
+# ----------------------------
+# Config (Kotak fixed layout)
+# ----------------------------
+COL_COMPANY = 2
+COL_ISIN = 3
+COL_SECTOR = 4
+COL_WEIGHT = 8
+
+# ----------------------------
+# Helpers
+# ----------------------------
+
+def is_valid_isin(x):
+    if not x:
+        return False
+    x = str(x).strip().upper()
+    return len(x) == 12 and x.isalnum()
+
+def is_reit(name, sector):
+    text = f"{name} {sector}".lower()
+    return any(k in text for k in [
+        "reit",
+        "invit",
+        "real estate investment trust",
+        "infrastructure investment trust"
+    ])
+
+# ----------------------------
+# MAIN PARSER
+# ----------------------------
 
 def parse_kotak_portfolio_excel(xls_path, sheet_name):
+
     df = pd.read_excel(xls_path, sheet_name=sheet_name, header=None)
 
-    # -----------------------------
-    # 1️⃣ Find header row
-    # -----------------------------
-    header_row = None
-    for i in range(25):
-        row = df.iloc[i].astype(str).str.lower()
-        if "name of instrument" in row.values and "isin code" in row.values:
-            header_row = i
-            break
-
-    if header_row is None:
-        raise ValueError(f"❌ Header row not found in {sheet_name}")
-
-    # -----------------------------
-    # 2️⃣ Slice data
-    # -----------------------------
-    data = df.iloc[header_row + 1:].reset_index(drop=True)
-
-    # Fixed Kotak column positions
-    COL_COMPANY = 2   # Name of Instrument
-    COL_ISIN = 3      # ISIN Code
-    COL_SECTOR = 4    # Industry
-    COL_WEIGHT = 8    # % to Net Assets
-
     holdings = []
+    section_summary = defaultdict(list)
 
-    # -----------------------------
-    # 3️⃣ Parse equity holdings
-    # -----------------------------
-    for _, row in data.iterrows():
+    current_section = SECTION_EQUITY
+
+    for _, row in df.iterrows():
+
         company = str(row[COL_COMPANY]).strip()
         isin = str(row[COL_ISIN]).strip()
         sector = str(row[COL_SECTOR]).strip()
+        weight_raw = row[COL_WEIGHT]
 
-        # Stop once NAV section starts
-        if company.lower().startswith("nav"):
-            break
+        row_text = " ".join(
+            str(x).lower()
+            for x in row.values
+            if pd.notna(x)
+        )
 
-        # Skip non-holding rows
-        if company.lower() in [
-            "",
-            "equity & equity related",
-            "listed/awaiting listing on stock exchange",
-            "mutual fund units",
-            "unlisted",
-            "futures",
-            "triparty repo",
-            "net current assets/(liabilities)",
-            "total",
-            "grand total",
-            "notes :",
-        ]:
+        # ----------------------------
+        # SECTION SWITCHING
+        # ----------------------------
+
+        if "equity & equity related" in row_text:
+            current_section = SECTION_EQUITY
             continue
 
-        # Only valid Indian equity ISINs
-        if not ISIN_REGEX.match(isin):
+        if "debt instruments" in row_text or "money market instruments" in row_text:
+            current_section = SECTION_DEBT
             continue
+
+        if "futures" in row_text or "derivatives" in row_text:
+            current_section = SECTION_DERIVATIVES
+            continue
+
+        if "treps" in row_text or "triparty repo" in row_text or "reverse repo" in row_text:
+            current_section = SECTION_CASH
+            continue
+
+        if "mutual fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        # ----------------------------
+        # SKIP JUNK ROWS  ✅ FIXED
+        # ----------------------------
+
+        if (
+            company.lower() in [
+                "",
+                "nan",
+                "total",
+                "sub total",
+                "grand total",
+                "listed/awaiting listing on stock exchange",
+                "unlisted",
+                "notes :"
+            ]
+            or company.lower().startswith("net current")
+        ):
+            continue
+
+        # ----------------------------
+        # WEIGHT
+        # ----------------------------
 
         try:
-            weight = float(row[COL_WEIGHT])
+            weight = float(str(weight_raw).replace("%", "").strip())
         except:
             continue
 
-        if math.isnan(weight):
+        if not math.isfinite(weight):
             continue
 
-        holdings.append({
+        weight = round(weight, 4)
+
+        # ----------------------------
+        # ISIN RULES
+        # ----------------------------
+
+        if not is_valid_isin(isin):
+            isin = None
+
+        if current_section == SECTION_EQUITY and isin is None:
+            continue
+
+        # ----------------------------
+        # FINAL SECTION  ✅ FIXED
+        # ----------------------------
+
+        if is_reit(company, sector):
+            section = SECTION_REITS
+        elif current_section == SECTION_DERIVATIVES:
+            section = SECTION_DERIVATIVES
+            isin = None
+        else:
+            section = current_section
+
+        holding = {
             "isin": isin,
             "company": company,
             "sector": sector,
-            "weight": round(weight, 2),
-            "weight_num": round(weight, 2),
-            "section": "equity"
-        })
+            "weight": weight,
+            "weight_num": weight,
+            "section": section
+        }
 
-    # -----------------------------
-    # 4️⃣ Section summary
-    # -----------------------------
-    equity_total = round(sum(h["weight"] for h in holdings), 2)
+        idx = len(holdings)
+        holdings.append(holding)
+        section_summary[section].append(idx)
 
-    top_10_equity = round(
-        sum(
-            h["weight"]
-            for h in sorted(holdings, key=lambda x: x["weight"], reverse=True)[:10]
-        ),
-        2
-    )
-
-    section_summary = {
-        "equity": equity_total,
-        "top_10_equity": top_10_equity
-    }
-
-    return holdings, section_summary
+    return holdings, dict(section_summary)

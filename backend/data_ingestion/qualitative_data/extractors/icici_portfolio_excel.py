@@ -10,6 +10,8 @@ SECTION_EQUITY = "equity"
 SECTION_DEBT = "debt"
 SECTION_REITS = "reits"
 SECTION_DERIVATIVES = "derivatives"
+SECTION_CASH = "cash"
+SECTION_OTHERS = "others"
 
 INVALID_PREFIXES = (
     "sub total",
@@ -37,7 +39,6 @@ def extract_name_isin(raw):
     return name, isin
 
 def find_isin_anywhere(row):
-    """ICICI: ISIN can be in any column (esp. debt / T-bills)."""
     for val in row.values:
         if is_valid_isin(val):
             return str(val).strip()
@@ -51,6 +52,14 @@ def is_reit(name, sector):
         "real estate investment trust"
     ])
 
+# NEW (small)
+def is_heading_reit_unit(name):
+    t = name.lower()
+    return (
+        "units of infrastructure investment trust" in t or
+        "units of real estate investment trust" in t
+    )
+
 def find_header_row(df):
     for i in range(len(df)):
         row = df.iloc[i]
@@ -60,10 +69,6 @@ def find_header_row(df):
     return None
 
 def detect_percent_column(df, qty_col_idx, start_row):
-    """
-    ICICI header lies: 'Exposure/% to NAV'
-    Detect % column by value distribution (0 < v <= 1).
-    """
     best_col = None
     best_score = 0.0
 
@@ -87,12 +92,11 @@ def detect_percent_column(df, qty_col_idx, start_row):
     return best_col
 
 # =====================================================
-# MAIN PARSER (SINGLE-PASS, PHASE-4A SAFE)
+# MAIN PARSER
 # =====================================================
 
 def parse_icici_portfolio_excel(xls_path, sheet_name):
 
-    # -------- READ EXCEL ONCE ONLY --------
     df = pd.read_excel(xls_path, sheet_name=sheet_name, header=None)
 
     header_row = find_header_row(df)
@@ -101,20 +105,18 @@ def parse_icici_portfolio_excel(xls_path, sheet_name):
 
     header = df.iloc[header_row].astype(str)
 
-    # -------- COLUMN INDEX RESOLUTION --------
     COL_COMPANY = header[header.str.contains("company", case=False)].index[0]
     COL_SECTOR  = header[header.str.contains("industry", case=False)].index[0]
     COL_QTY     = header[header.str.contains("quantity", case=False)].index[0]
-
-    COL_WEIGHT = detect_percent_column(df, COL_QTY, header_row + 1)
+    COL_WEIGHT  = detect_percent_column(df, COL_QTY, header_row + 1)
 
     holdings = []
     section_summary = defaultdict(list)
 
-    # ICICI category sheets: equity starts immediately
     current_section = SECTION_EQUITY
 
-    # -------- ITERATE FULL SHEET --------
+    # =================================================
+
     for i in range(header_row + 1, len(df)):
         row = df.iloc[i]
 
@@ -123,16 +125,19 @@ def parse_icici_portfolio_excel(xls_path, sheet_name):
         )
 
         # ---------- SECTION SWITCHES ----------
+
         if any(x in row_text for x in [
             "debt instruments",
             "money market instruments",
             "commercial papers",
             "certificate of deposits",
             "treasury bills",
-            "reverse repo",
-            "treps",
         ]):
             current_section = SECTION_DEBT
+            continue
+
+        if any(x in row_text for x in ["reverse repo", "treps"]):
+            current_section = SECTION_CASH
             continue
 
         if any(x in row_text for x in [
@@ -144,25 +149,47 @@ def parse_icici_portfolio_excel(xls_path, sheet_name):
             current_section = SECTION_DERIVATIVES
             continue
 
+        if "exchange traded funds" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
+        if "mutual fund units" in row_text:
+            current_section = SECTION_DEBT
+            continue
+
+        if "alternative investment fund units" in row_text:
+            current_section = SECTION_OTHERS
+            continue
+
         # ---------- DATA EXTRACTION ----------
+
         raw_name = row[COL_COMPANY]
         sector = row[COL_SECTOR]
         weight_raw = row[COL_WEIGHT]
+        qty = row[COL_QTY]
 
         if pd.isna(raw_name) or pd.isna(weight_raw):
             continue
 
+        # Skip heading rows (no quantity)
+        if current_section not in (SECTION_DERIVATIVES, SECTION_CASH):
+            if pd.isna(qty):
+                continue
+
         raw_name = str(raw_name).strip()
+
         if raw_name.lower().startswith(INVALID_PREFIXES):
             continue
 
         name, isin = extract_name_isin(raw_name)
 
-        # 🔑 ICICI FINAL ISIN RESOLUTION (ANYWHERE)
+        # Skip REIT/InvIT heading rows
+        if is_heading_reit_unit(name):
+            continue
+
         if not isin:
             isin = find_isin_anywhere(row)
 
-        # 🔒 STRICT ISIN ONLY FOR EQUITY
         if current_section == SECTION_EQUITY and not isin:
             continue
 
@@ -176,20 +203,32 @@ def parse_icici_portfolio_excel(xls_path, sheet_name):
         if not math.isfinite(weight):
             continue
 
-        # ICICI provides fraction (0–1)
         if weight <= 1:
             weight *= 100
 
         weight = round(weight, 4)
 
         # ---------- FINAL SECTION ----------
-        if current_section == SECTION_DERIVATIVES:
-            section = SECTION_DERIVATIVES
-            isin = None
-        elif is_reit(name, sector):
-            section = SECTION_REITS
+
+        # ---------- FINAL SECTION ----------
+
+        # Force REIT / InvIT first (override everything)
+        if is_reit(name, sector):
+         section = SECTION_REITS
+
+        elif current_section == SECTION_DERIVATIVES:
+          section = SECTION_DERIVATIVES
+          isin = None
+
+        elif "gold etf" in name.lower() or "silver etf" in name.lower():
+         section = SECTION_OTHERS
+
+        elif sector.strip().lower() == "mutual fund":
+          section = SECTION_OTHERS
+
+
         else:
-            section = current_section
+         section = current_section
 
         holding = {
             "isin": isin,
@@ -205,3 +244,4 @@ def parse_icici_portfolio_excel(xls_path, sheet_name):
         section_summary[section].append(idx)
 
     return holdings, dict(section_summary)
+

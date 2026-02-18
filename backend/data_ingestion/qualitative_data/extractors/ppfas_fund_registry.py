@@ -24,6 +24,12 @@ PPFAS_FUND_REGISTRY = {
         "category": "Dynamic Asset Allocation",
         "asset_class": "Hybrid",
         "sheet": "PPDAAF"
+    },
+    "PPFAS_CONSERVATIVE_HYBRID" : {
+        "canonical_name": "Parag Parikh Conservative Hybrid Fund",
+        "category": "Conservative Hybrid Fund",
+        "asset_class": "Hybrid",
+        "sheet": "PPCHF"
     }
 }
 

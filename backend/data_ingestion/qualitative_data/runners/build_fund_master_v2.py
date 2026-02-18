@@ -1,8 +1,15 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 from extractors.ppfas_fund_registry import PPFAS_FUND_REGISTRY
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 fund_benchmark_col = db["fund_benchmark_map_v2"]
 

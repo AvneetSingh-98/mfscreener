@@ -2,29 +2,44 @@ from pymongo import MongoClient, ASCENDING
 from fetch_nav import fetch_amfi_nav
 from parse_nav import parse_amfi_nav
 import os
+from dotenv import load_dotenv
+import certifi
+
+load_dotenv()
 
 # --- CONFIG ---
-MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
-DB_NAME = os.environ.get("DB_NAME", "mfscreener")
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME", "mfscreener")
 
 
 def store_nav_records():
     print("Connecting to MongoDB...")
-    client = MongoClient(MONGO_URL)
+    client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
     db = client[DB_NAME]
     collection = db.nav_history
 
-    # Ensure unique index (safe to run multiple times)
+    # Ensure unique index
     collection.create_index(
         [("scheme_code", ASCENDING), ("date", ASCENDING)],
         unique=True
     )
 
     print("Fetching AMFI NAV data...")
-    raw_text = fetch_amfi_nav()
+
+    # SAFETY WRAPPER
+    try:
+        raw_text = fetch_amfi_nav()
+    except Exception as e:
+        print("AMFI NAV fetch failed. Skipping NAV ingestion for today.")
+        print(e)
+        return   # <--- prevents crash
 
     print("Parsing NAV records...")
     records = parse_amfi_nav(raw_text)
+
+    if not records:
+        print(" No NAV records parsed. Skipping insert.")
+        return
 
     print(f"Inserting {len(records)} NAV records...")
 
@@ -43,7 +58,6 @@ def store_nav_records():
             collection.insert_one(doc)
             inserted += 1
         except Exception:
-            # Duplicate (already exists)
             skipped += 1
 
     print(f"Inserted: {inserted}")

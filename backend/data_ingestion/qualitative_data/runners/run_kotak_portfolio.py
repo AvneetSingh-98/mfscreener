@@ -1,53 +1,66 @@
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
-from extractors.kotak_index_resolver import resolve_kotak_sheet
+from datetime import datetime
+
+from extractors.kotak_fund_registry import KOTAK_FUND_REGISTRY
 from extractors.kotak_portfolio_excel import parse_kotak_portfolio_excel
 
-XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-11\Kotak Mahindra\Kotak_Portfolio.xls"
+XLS_PATH = r"D:\mfscreener-main\backend\data_ingestion\qualitative_data\factsheets\2025-12\Kotak Mahindra\Kotak_Portfolio.xlsx"
 
-FUNDS = [
-    {"key": "KOTAK_LARGE_CAP", "keyword": "large cap", "category": "Large Cap"},
-    {"key": "KOTAK_LARGE_MID_CAP", "keyword": "large & mid", "category": "Large & Mid Cap"},
-    {"key": "KOTAK_MID_CAP", "keyword": "midcap", "category": "Mid Cap"},
-    {"key": "KOTAK_SMALL_CAP", "keyword": "small cap", "category": "Small Cap"},
-    {"key": "KOTAK_FLEXI_CAP", "keyword": "standard multicap", "category": "Flexi Cap"},
-    {"key": "KOTAK_MULTI_CAP", "keyword": "multi cap", "category": "Multi Cap"},
-    {"key": "KOTAK_CONTRA", "keyword": "contra", "category": "Contra"},
-    {"key": "KOTAK_FOCUSED", "keyword": "focused", "category": "Focused"},
-    {"key": "KOTAK_ELSS", "keyword": "elss", "category": "ELSS"},
-]
+AMC = "Kotak Mahindra Mutual Fund"
+AS_OF = "2025-12-31"
 
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 col = db["portfolio_holdings_v2"]
 
-for meta in FUNDS:
+for fund_key, meta in KOTAK_FUND_REGISTRY.items():
+
     print("=" * 60)
-    print(f"🚀 Running {meta['key']}")
+    print(f"🚀 Running KOTAK fund : {fund_key}")
+    print(f"📄 Sheet resolved : {meta['sheet']}")
 
-    sheet = resolve_kotak_sheet(XLS_PATH, meta["keyword"])
-    print(f"📄 Sheet resolved : {sheet}")
-
-    holdings, section_summary = parse_kotak_portfolio_excel(XLS_PATH, sheet)
+    holdings, section_summary = parse_kotak_portfolio_excel(
+        XLS_PATH,
+        meta["sheet"]
+    )
 
     if not holdings:
-        print(f"⚠️ No holdings found for {meta['key']}")
+        print(f"⚠️ No holdings found for {fund_key}")
         continue
 
-    doc = {
-        "fund_key": meta["key"],
-        "amc": "Kotak Mahindra Mutual Fund",
-        "as_of": "2025-11-30",
-        "asset_class": "Equity",
-        "category": meta["category"],
-        "counts": {"equity": len(holdings)},
-        "holdings": holdings,
-        "section_summary": section_summary
-    }
+    equity_weights = [
+        h["weight_num"]
+        for h in holdings
+        if h["section"] == "equity"
+    ]
 
-    col.replace_one(
-        {"fund_key": meta["key"], "as_of": "2025-11-30"},
-        doc,
+    top_10_weight = round(
+        sum(sorted(equity_weights, reverse=True)[:10]),
+        4
+    )
+
+    col.update_one(
+        {"fund_key": fund_key, "amc": AMC, "as_of": AS_OF},
+        {"$set": {
+            "fund_key": fund_key,
+            "amc": AMC,
+            "category": meta["category"],
+            "asset_class": meta["asset_class"],
+            "as_of": AS_OF,
+            "holdings": holdings,
+            "section_summary": section_summary,
+            "counts": {"total": len(holdings)},
+            "top_10_weight": top_10_weight,
+            "ingested_at": datetime.utcnow()
+        }},
         upsert=True
     )
 
-    print(f"✅ Done: {meta['key']} | Holdings = {len(holdings)}")
+    print(f"✅ Done: {fund_key} | Holdings = {len(holdings)}")

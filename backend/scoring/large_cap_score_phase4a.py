@@ -1,12 +1,19 @@
 import numpy as np
 import pandas as pd
+import os
+from dotenv import load_dotenv
+import certifi
 from pymongo import MongoClient
 from datetime import datetime
 
 # ======================
 # DB CONNECTION
 # ======================
-client = MongoClient("mongodb://localhost:27017")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client["mfscreener"]
 
 fund_col = db.fund_master
