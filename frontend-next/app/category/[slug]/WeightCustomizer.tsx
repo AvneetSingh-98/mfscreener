@@ -7,10 +7,35 @@ interface WeightCustomizerProps {
   onWeightsChange: (weights: WeightPreset) => void;
 }
 
+// Info content for each metric
+const METRIC_INFO: Record<keyof WeightPreset, { title: string; description: string }> = {
+  consistency: {
+    title: "Consistency",
+    description: "Measures how stable and predictable the fund's returns are over time. Higher consistency means fewer surprises."
+  },
+  recent_performance: {
+    title: "Recent Performance",
+    description: "Evaluates the fund's returns over the most recent periods. Shows current momentum and trend."
+  },
+  risk: {
+    title: "Risk",
+    description: "Assesses volatility and downside protection. Lower risk means more stable returns with less fluctuation."
+  },
+  valuation: {
+    title: "Valuation",
+    description: "Analyzes whether the fund's holdings are trading at attractive prices relative to their fundamentals."
+  },
+  portfolio_quality: {
+    title: "Portfolio Quality",
+    description: "Evaluates the quality of companies held in the portfolio based on financial health and business strength."
+  }
+};
+
 export default function WeightCustomizer({ onWeightsChange }: WeightCustomizerProps) {
   const [activePreset, setActivePreset] = useState<string>("balanced");
   const [weights, setWeights] = useState<WeightPreset>(WEIGHT_PRESETS.balanced);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [activeInfoModal, setActiveInfoModal] = useState<keyof WeightPreset | null>(null);
   
   // Track which weights have been manually adjusted (to keep them fixed)
   const [adjustedWeights, setAdjustedWeights] = useState<Set<keyof WeightPreset>>(new Set());
@@ -240,16 +265,52 @@ export default function WeightCustomizer({ onWeightsChange }: WeightCustomizerPr
                   display: "flex", 
                   justifyContent: "space-between", 
                   marginBottom: 8,
-                  fontSize: 12
+                  fontSize: 14,
+                  alignItems: "center"
                 }}>
-                  <label style={{ 
-                    fontWeight: 600, 
-                    textTransform: "capitalize",
-                    color: adjustedWeights.has(category) ? "var(--accent-teal)" : "var(--text-secondary)"
-                  }}>
-                    {category.replace(/_/g, " ")}
-                    {adjustedWeights.has(category) && " 🔒"}
-                  </label>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <label style={{ 
+                      fontWeight: 600, 
+                      textTransform: "capitalize",
+                      color: adjustedWeights.has(category) ? "var(--accent-teal)" : "var(--text-secondary)"
+                    }}>
+                      {category.replace(/_/g, " ")}
+                      {adjustedWeights.has(category) && " 🔒"}
+                    </label>
+                    <button
+                      onClick={() => setActiveInfoModal(category)}
+                      style={{
+                        background: "none",
+                        border: "1px solid var(--text-muted)",
+                        borderRadius: "50%",
+                        width: 14,
+                        height: 14,
+                        cursor: "pointer",
+                        padding: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "var(--text-muted)",
+                        fontSize: 10,
+                        fontWeight: 700,
+                        transition: "all 0.2s ease",
+                        fontFamily: "serif"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "scale(1.15)";
+                        e.currentTarget.style.borderColor = "var(--text-secondary)";
+                        e.currentTarget.style.color = "var(--text-secondary)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
+                        e.currentTarget.style.borderColor = "var(--text-muted)";
+                        e.currentTarget.style.color = "var(--text-muted)";
+                      }}
+                      title={`Learn more about ${category.replace(/_/g, " ")}`}
+                    >
+                      i
+                    </button>
+                  </div>
                   <span style={{ fontWeight: 700, color: "var(--accent-teal)", fontFamily: "'SF Mono', 'Monaco', monospace" }}>
                     {weights[category]}%
                   </span>
@@ -309,6 +370,82 @@ export default function WeightCustomizer({ onWeightsChange }: WeightCustomizerPr
             </div>
           )}
         </>
+      )}
+
+      {/* Info Modal */}
+      {activeInfoModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            padding: 20
+          }}
+          onClick={() => setActiveInfoModal(null)}
+        >
+          <div
+            style={{
+              backgroundColor: "var(--bg-card)",
+              borderRadius: 16,
+              padding: 32,
+              maxWidth: 600,
+              width: "100%",
+              maxHeight: "80vh",
+              overflow: "auto",
+              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
+              border: "1px solid var(--border-default)"
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 20 }}>
+              <h2 style={{ 
+                margin: 0, 
+                fontSize: 24, 
+                fontWeight: 700, 
+                color: "var(--text-primary)" 
+              }}>
+                {METRIC_INFO[activeInfoModal].title}
+              </h2>
+              <button
+                onClick={() => setActiveInfoModal(null)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: 28,
+                  cursor: "pointer",
+                  color: "var(--text-muted)",
+                  padding: 0,
+                  lineHeight: 1,
+                  transition: "color 0.2s ease"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "var(--text-muted)";
+                }}
+              >
+                ×
+              </button>
+            </div>
+
+            <p style={{ 
+              fontSize: 16, 
+              lineHeight: 1.6, 
+              color: "var(--text-secondary)",
+              marginBottom: 0
+            }}>
+              {METRIC_INFO[activeInfoModal].description}
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
