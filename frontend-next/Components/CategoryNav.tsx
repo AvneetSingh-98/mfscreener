@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CATEGORIES } from "@/lib/categories";
 
 export default function CategoryNav() {
   const pathname = usePathname();
-  const [activeTab, setActiveTab] = useState<"equity" | "sector">("equity");
-
+  
   // Split categories into Equity and Sector/Thematic
   const equityCategories = CATEGORIES.filter(cat => 
     ["large-cap", "mid-cap", "small-cap", "flexi-cap", "elss", "focused", "value", "contra", "multi-cap", "large-mid-cap"].includes(cat.slug)
@@ -17,6 +16,18 @@ export default function CategoryNav() {
   const sectorCategories = CATEGORIES.filter(cat => 
     ["healthcare", "banking-financial-services", "technology", "quant", "infrastructure", "business-cycle", "esg", "consumption"].includes(cat.slug)
   );
+
+  // Determine active tab based on current pathname
+  const currentSlug = pathname?.split('/').pop() || '';
+  const isSectorCategory = sectorCategories.some(cat => cat.slug === currentSlug);
+  
+  const [activeTab, setActiveTab] = useState<"equity" | "sector">(isSectorCategory ? "sector" : "equity");
+
+  // Update activeTab when pathname changes
+  useEffect(() => {
+    const newTab = isSectorCategory ? "sector" : "equity";
+    setActiveTab(newTab);
+  }, [pathname, isSectorCategory]);
 
   const displayCategories = activeTab === "equity" ? equityCategories : sectorCategories;
 
@@ -149,9 +160,27 @@ export default function CategoryNav() {
       `}</style>
       
       <div className="padding-responsive">
-        <h2 className="title-responsive" style={{ fontWeight: 700, marginBottom: "20px", color: "var(--text-primary)" }}>
-          MF Screener
-        </h2>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+          <h2 className="title-responsive" style={{ fontWeight: 700, margin: 0, color: "var(--text-primary)" }}>
+            MF Screener
+          </h2>
+          <Link 
+            href="/faq"
+            style={{
+              padding: "10px 20px",
+              fontSize: 14,
+              fontWeight: 600,
+              color: "var(--accent-primary)",
+              textDecoration: "none",
+              border: "1px solid var(--accent-primary)",
+              borderRadius: 8,
+              transition: "all 0.2s ease",
+              whiteSpace: "nowrap"
+            }}
+          >
+            FAQ
+          </Link>
+        </div>
         
         {/* Equity / Sector Toggle */}
         <div style={{ 

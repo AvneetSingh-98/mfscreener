@@ -27,6 +27,9 @@ SCRIPTS = [
 
     # 🔴 Phase-3C
     ROOT / "scoring" / "large_cap_score_phase3c.py",
+    
+    # 🔴 Phase-normalization
+    ROOT / "scoring" / "normalise_sub_scores.py"
 ]
 
 

@@ -36,7 +36,7 @@ export default async function CategoryPage({ params }: PageProps) {
   return (
     <div style={{ backgroundColor: "var(--bg-page)", minHeight: "100vh" }}>
       <CategoryNav />
-      <CategoryClient initialRows={rows} categoryName={categoryName} />
+      <CategoryClient initialRows={rows} categoryName={categoryName} slug={slug} />
     </div>
   );
 }

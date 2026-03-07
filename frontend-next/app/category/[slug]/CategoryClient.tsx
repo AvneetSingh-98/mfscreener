@@ -10,6 +10,7 @@ import { FundRankingRow } from "@/lib/types";
 interface CategoryClientProps {
   initialRows: FundRankingRow[];
   categoryName: string;
+  slug: string;
 }
 
 type SortField = 
@@ -37,7 +38,11 @@ const cleanFundName = (name: string) => {
 
 type MobileMetric = "overall_score" | "cagr_3y" | "cagr_5y" | "rolling_3y" | "rolling_5y" | "sharpe" | "sortino" | "volatility" | "ir" | "aum";
 
-export default function CategoryClient({ initialRows, categoryName }: CategoryClientProps) {
+import FAQ from "@/Components/FAQ";
+import { categoryFAQs } from "@/lib/faqData";
+import Footer from "@/Components/Footer";
+
+export default function CategoryClient({ initialRows, categoryName, slug }: CategoryClientProps) {
   console.log("CategoryClient loaded");
   
   const [weights, setWeights] = useState<WeightPreset>(WEIGHT_PRESETS.balanced);
@@ -301,6 +306,7 @@ export default function CategoryClient({ initialRows, categoryName }: CategoryCl
     const [isHovered, setIsHovered] = useState(false);
     const av = r.actual_values;
     const bgColor = isHovered ? "var(--bg-card-hover)" : "transparent";
+    const stickyBgColor = isHovered ? "var(--bg-card-hover)" : "var(--bg-card)";
 
     return (
       <tr
@@ -320,7 +326,7 @@ export default function CategoryClient({ initialRows, categoryName }: CategoryCl
           fontSize: 12,
           position: "sticky",
           left: 0,
-          backgroundColor: bgColor,
+          backgroundColor: stickyBgColor,
           zIndex: 5,
           fontFamily: "'SF Mono', 'Monaco', monospace",
         }}>
@@ -330,7 +336,7 @@ export default function CategoryClient({ initialRows, categoryName }: CategoryCl
           padding: "14px 16px",
           position: "sticky",
           left: 50,
-          backgroundColor: bgColor,
+          backgroundColor: stickyBgColor,
           zIndex: 5,
           minWidth: 400,
           maxWidth: 400,
@@ -1257,7 +1263,17 @@ export default function CategoryClient({ initialRows, categoryName }: CategoryCl
             </div>
           </div>
         )}
+
+        {/* FAQ Section */}
+        {categoryFAQs[slug] && categoryFAQs[slug].length > 0 && (
+          <div style={{ marginTop: 40 }}>
+            <FAQ items={categoryFAQs[slug]} title={`${categoryName} Funds - FAQ`} />
+          </div>
+        )}
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

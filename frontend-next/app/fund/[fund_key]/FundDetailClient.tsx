@@ -20,6 +20,9 @@ const getScoreColor = (v?: number | null): string => {
   return "#ef4444";
 };
 
+import FAQ from "@/components/FAQ";
+import { getFundPageFAQs } from "@/lib/faqData";
+
 export default function FundDetailClient({ fundDetail, navData }: FundDetailClientProps) {
   const { fund_info, normalized_scores, portfolio, sector_concentration, qualitative_attributes } = fundDetail;
 
@@ -272,12 +275,21 @@ export default function FundDetailClient({ fundDetail, navData }: FundDetailClie
           padding: 20,
           backgroundColor: "var(--bg-card)",
           borderRadius: 8,
-          border: "1px solid var(--border-default)"
+          border: "1px solid var(--border-default)",
+          marginBottom: 24
         }}>
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 16, color: "var(--text-primary)" }}>NAV History</h2>
           <NAVChart navData={navData} />
         </div>
       )}
+
+      {/* FAQ Section */}
+      <div style={{ marginTop: 24 }}>
+        <FAQ 
+          items={getFundPageFAQs(fund_info.scheme_name, fund_info.amc)} 
+          title="Frequently Asked Questions"
+        />
+      </div>
     </div>
   );
 }
