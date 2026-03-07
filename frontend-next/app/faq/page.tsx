@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import FAQ, { FAQItem } from "@/components/FAQ";
+import FAQ, { FAQItem } from "@/Components/FAQ";
 
 export const metadata: Metadata = {
   title: "Mutual Fund FAQ - Complete Guide to MF Investing in India",
