@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
+// SEO optimized metadata for better search engine visibility
 export const metadata: Metadata = {
   title: {
     default: "MF Screener - Best Mutual Fund Screener India 2026",
