@@ -20,7 +20,7 @@ const getScoreColor = (v?: number | null): string => {
   return "#ef4444";
 };
 
-import FAQ from "@/components/FAQ";
+import FAQ from "@/Components/FAQ";
 import { getFundPageFAQs } from "@/lib/faqData";
 
 export default function FundDetailClient({ fundDetail, navData }: FundDetailClientProps) {
