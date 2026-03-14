@@ -115,16 +115,36 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div style={{
           paddingTop: 24,
-          borderTop: "1px solid var(--border-default)",
-          textAlign: "center"
+          borderTop: "1px solid var(--border-default)"
         }}>
-          <p style={{ 
-            fontSize: 13, 
-            color: "var(--text-muted)",
-            margin: 0
+          {/* Disclaimer */}
+          <div style={{
+            padding: "16px 20px",
+            backgroundColor: "var(--bg-elevated)",
+            borderRadius: 8,
+            marginBottom: 16,
+            border: "1px solid var(--border-default)"
           }}>
-            © {new Date().getFullYear()} MF Screener. All rights reserved.
-          </p>
+            <p style={{ 
+              fontSize: 12, 
+              color: "var(--text-muted)",
+              margin: 0,
+              lineHeight: 1.6
+            }}>
+              <strong style={{ color: "var(--text-secondary)" }}>Disclaimer:</strong> All fund data on MF Screener is sourced directly from AMFI (Association of Mutual Funds in India), NSE, and BSE. Our scores and metrics are independent analytical computations. We are not a SEBI Registered Investment Adviser and do not provide personalised investment advice. Scores and rankings are for informational purposes only.
+            </p>
+          </div>
+
+          {/* Copyright */}
+          <div style={{ textAlign: "center" }}>
+            <p style={{ 
+              fontSize: 13, 
+              color: "var(--text-muted)",
+              margin: 0
+            }}>
+              © {new Date().getFullYear()} MF Screener. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

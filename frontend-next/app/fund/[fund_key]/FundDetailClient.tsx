@@ -22,6 +22,7 @@ const getScoreColor = (v?: number | null): string => {
 
 import FAQ from "@/Components/FAQ";
 import { getFundPageFAQs } from "@/lib/faqData";
+import Footer from "@/Components/Footer";
 
 export default function FundDetailClient({ fundDetail, navData }: FundDetailClientProps) {
   const { fund_info, normalized_scores, portfolio, sector_concentration, qualitative_attributes } = fundDetail;
@@ -290,6 +291,9 @@ export default function FundDetailClient({ fundDetail, navData }: FundDetailClie
           title="Frequently Asked Questions"
         />
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
