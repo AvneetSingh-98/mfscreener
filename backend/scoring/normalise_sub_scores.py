@@ -150,7 +150,7 @@ def percentile_map_by_scheme(merged, field, reverse=False):
 # =========================
 def normalize_category(category, score_coll):
 
-    print(f"\n🔄 Normalizing {category}")
+    print(f"\n[*] Normalizing {category}")
     score_docs = list(db[score_coll].find({}))
     if not score_docs:
         return
@@ -229,7 +229,7 @@ def normalize_category(category, score_coll):
             "alpha_iqr_3y": alpha_iqr_3y,
             "alpha_iqr_5y": alpha_iqr_5y,
 
-            "rolling_3y_obs": obs_3y,   # ⭐ ADD
+            "rolling_3y_obs": obs_3y,   # ADD
             "rolling_5y_obs": obs_5y,
 
             # Risk
@@ -339,7 +339,7 @@ def normalize_category(category, score_coll):
     db[coll].delete_many({})
     db[coll].insert_many(out)
 
-    print(f"✅ Normalized {len(out)} funds")
+    print(f"[OK] Normalized {len(out)} funds")
 
 
 if __name__ == "__main__":
